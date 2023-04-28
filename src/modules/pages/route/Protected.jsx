@@ -23,7 +23,7 @@ function Protected(props) {
 
     return (
         <div>
-            <TopBar />
+            {/* <TopBar /> */}
 
             <Components />
             

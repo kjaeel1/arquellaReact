@@ -944,9 +944,9 @@ Next
 
   return (
     <div className=''>
-      <Box sx={{ flexGrow: 1 }} >
+      <Box sx={{ flexGrow: 1 }} xs={12} md={12} ls={12} >
         <Grid container spacing={0} >
-          <Grid item xs={6} >
+          <Grid item xs={6} md={6} ls={6} >
             <div className='loginImageCont' >
               <div className='textWrap'>
                 <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
@@ -954,7 +954,7 @@ Next
               </div>
             </div>
           </Grid>
-          <Grid item xs={6}  >
+          <Grid item xs={6} md={6} ls={6} >
             <div className='formContainerTop' >
               <div className='uperContian'>
                 <div className='logoCont'>
