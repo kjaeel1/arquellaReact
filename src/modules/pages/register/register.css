@@ -4,3 +4,94 @@ font-weight: 700;
 font-size: 12px;
 line-height: 20px;
 }
+
+
+
+.already {
+    font-family: 'Mulish';
+font-style: italic;
+font-weight: 400;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+
+/* sgray-200 */
+
+color: #29373D;
+}
+
+.login {
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height, or 143% */
+    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    /* M3/sys/light/primary */
+    
+    color: #10CFC9;
+}
+
+.pwText {
+    /* background-color: #000000; */
+/* M3/sys/light/on-surface-variant */
+width: 100%;
+
+}
+
+.pwText1 {
+ 
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+    
+    
+    /* M3/sys/light/on-surface-variant */
+    
+    color: #49454F;
+}
+
+
+.formContainerTop {
+    background-color: #FFFBFF;
+}
+
+.dynamicText {
+    font-family: 'Mulish';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+
+/* display: flex; */
+/* align-items: center;
+text-align: center; */
+
+/* Aequella 100 */
+
+color: #10CFC9;
+}
+
+@media only screen and (max-width: 600px) {
+    .loginImageCont{
+        display: none
+    }
+
+    .formContent {
+        /* align-items: center;
+        align-self: center;
+        align-content: center; */
+    }
+  }
+
+ 

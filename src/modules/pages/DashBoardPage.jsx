@@ -1,9 +1,12 @@
 
 import React from 'react'
 
+
 function DashBoardPage() {
   return (
-    <div>DashBoardPage</div>
+    <div>
+  
+      DashBoardPage</div>
   )
 }
 

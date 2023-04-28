@@ -1,6 +1,7 @@
 
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import TopBar from '../../compon/topBar';
 
 function Protected(props) {
 
@@ -9,7 +10,11 @@ function Protected(props) {
 
     useEffect(() => {
         let login = localStorage.getItem('login');
-        if (!login) {
+        // if (!login) {
+        //     navigate('/login')
+
+        // }
+        if (login) {
             navigate('/login')
 
         }
@@ -17,7 +22,12 @@ function Protected(props) {
     })
 
     return (
-        <div><Components /></div>
+        <div>
+            <TopBar />
+
+            <Components />
+            
+            </div>
     )
 }
 

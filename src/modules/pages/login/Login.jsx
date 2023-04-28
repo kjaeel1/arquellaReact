@@ -78,10 +78,10 @@ function Login() {
 
 
   return (
-    <div className=''>
-      <Box sx={{ flexGrow: 1 }} >
-        <Grid container spacing={0} >
-          <Grid item xs={6} >
+    <div  >
+      <Box>
+        <Grid container spacing={0}  xs={12} sm={12} lg={12} >
+          <Grid item  xs={6} sm={6} lg={6} className='loginImageCont'>
             <div className='loginImageCont' >
               <div className='textWrap'>
                 <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
@@ -89,7 +89,7 @@ function Login() {
               </div>
             </div>
           </Grid>
-          <Grid item xs={6}  >
+          <Grid item  xs={6} sm={6} lg={6} className='formContent'>
             <div className='formContainerTop' >
               <div className='uperContian'>
                 <div className='logoCont'>
@@ -175,7 +175,9 @@ function Login() {
                         <Checkbox {...label} defaultChecked />
                         <p className='remember'> Remember Me</p>
                       </div>
-                      <Button variant="contained" startIcon={<LoginIcon />} sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20 }}>
+                      <Button variant="contained" startIcon={<LoginIcon />} sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20 }}
+                      onClick={() => navigation.navigate('DashBoardPage')}
+                      >
                         LogIn
                       </Button>
 
@@ -226,7 +228,7 @@ function Login() {
                           </FormControl>
                         </Grid>
                         <Grid item xs={6} style={{marginTop: 15, }}>
-                          <Link href="/Register" variant="body2" className='forgotpw' style={{textDecoration: 'none',     marginLeft: 25}}>
+                          <Link href="/registration" variant="body2" className='forgotpw' style={{textDecoration: 'none',     marginLeft: 25}}>
                             {"Forgot password"}
                           </Link>
                         </Grid>
