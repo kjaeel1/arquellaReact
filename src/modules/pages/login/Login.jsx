@@ -22,6 +22,7 @@ import Link from "@mui/material/Link";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -48,6 +49,7 @@ function Login() {
     setAge(event.target.value);
   };
 
+  const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -176,7 +178,7 @@ function Login() {
                         <p className='remember'> Remember Me</p>
                       </div>
                       <Button variant="contained" startIcon={<LoginIcon />} sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20 }}
-                      onClick={() => navigation.navigate('DashBoardPage')}
+                      onClick={() => navigate('/dashboard')}
                       >
                         LogIn
                       </Button>
