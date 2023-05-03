@@ -5,7 +5,8 @@ import Typography from '@mui/material/Typography';
 function DashBoardPage() {
   return (
     <div>
-      ss
+  
+      DashBoardPage yes
       </div>
   )
 }
