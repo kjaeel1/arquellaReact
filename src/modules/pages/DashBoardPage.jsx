@@ -6,7 +6,7 @@ function DashBoardPage() {
   return (
     <div>
   
-      DashBoardPage</div>
+      DashBoardPage yes</div>
   )
 }
 
