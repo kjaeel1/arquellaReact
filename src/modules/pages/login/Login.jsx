@@ -83,7 +83,7 @@ function Login() {
     <div  >
       <Box>
         <Grid container spacing={0}  xs={12} sm={12} lg={12} >
-          <Grid item  xs={6} sm={6} lg={6} className='loginImageCont'>
+          <Grid item  xs={12} sm={6} lg={6} className='loginImageCont'>
             <div className='loginImageCont' >
               <div className='textWrap'>
                 <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
@@ -91,7 +91,7 @@ function Login() {
               </div>
             </div>
           </Grid>
-          <Grid item  xs={6} sm={6} lg={6} className='formContent'>
+          <Grid item  xs={12} sm={6} lg={6} className='formContent'>
             <div className='formContainerTop' >
               <div className='uperContian'>
                 <div className='logoCont'>
