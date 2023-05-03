@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -38,6 +38,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import IconButton from '@mui/material/IconButton';
 
 import logo from '../../../static/assets/images/arquellaLogoPng.png'
+import axios from 'axios';
 
 // import logo from '../../../'
 
@@ -45,6 +46,12 @@ const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Login() {
   const [age, setAge] = React.useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+
+
+
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -69,12 +76,38 @@ function Login() {
 
 
   const handleSubmit = (event) => {
+    console.log("conotrooler hittee");
     event.preventDefault();
+
     const data = new FormData(event.currentTarget);
+
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
+
+    setEmail(data.get("email"));
+    setPassword(data.get("password"));
+
+    let userPayload ={
+      email:data.get("email"),
+      password: data.get("password"), 
+    }
+
+    const user = {
+      email,
+      password,
+    }
+
+    axios.post('http://localhost:3007/auth/login', userPayload)
+      .then(res => {
+        localStorage.setItem('refreshToken', res.data.refresh_token);
+        // redirect to home page or dashboard
+      })
+      .catch(error => {
+        setError(error.response.data.message);
+      });
+      
   };
 
 
@@ -82,8 +115,8 @@ function Login() {
   return (
     <div  >
       <Box>
-        <Grid container spacing={0}  xs={12} sm={12} lg={12} >
-          <Grid item  xs={6} sm={6} lg={6} className='loginImageCont'>
+        <Grid container spacing={0} xs={12} sm={12} lg={12} >
+          <Grid item xs={6} sm={6} lg={6} className='loginImageCont'>
             <div className='loginImageCont' >
               <div className='textWrap'>
                 <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
@@ -91,7 +124,7 @@ function Login() {
               </div>
             </div>
           </Grid>
-          <Grid item  xs={6} sm={6} lg={6} className='formContent'>
+          <Grid item xs={6} sm={6} lg={6} className='formContent'>
             <div className='formContainerTop' >
               <div className='uperContian'>
                 <div className='logoCont'>
@@ -140,48 +173,51 @@ function Login() {
                       </Container>
                       <br />
                       <Container component="main"   >
-                      <FormControl  variant="outlined"   style={{width: '100%'}}>
-                      <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                      <OutlinedInput
-                        id="outlined-adornment-password"
-                        
-                        type={showPassword ? 'text' : 'password'}
-                        endAdornment={
-                          <InputAdornment position="end">
-                            <IconButton
-                              aria-label="toggle password visibility"
-                              onClick={handleClickShowPassword}
-                              onMouseDown={handleMouseDownPassword}
-                              edge="end"
-                            >
-                              {showPassword ? <VisibilityOff /> : <Visibility />}
-                            </IconButton>
-                          </InputAdornment>
-                        }
-                        label="Password"
-                        fullWidth
-                      />
-                    </FormControl>
-                    </Container>
-                      {/* <FormControlLabel
+                        <FormControl variant="outlined" style={{ width: '100%' }}>
+                          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                          <OutlinedInput
+                            id="outlined-adornment-password"
+                            name='password'
+
+                            type={showPassword ? 'text' : 'password'}
+                            endAdornment={
+                              <InputAdornment position="end">
+                                <IconButton
+                                  aria-label="toggle password visibility"
+                                  onClick={handleClickShowPassword}
+                                  onMouseDown={handleMouseDownPassword}
+                                  edge="end"
+                                >
+                                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                                </IconButton>
+                              </InputAdornment>
+                            }
+                            label="Password"
+                            fullWidth
+                          />
+
+
+                        </FormControl>
+                        {/* <FormControlLabel
             
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
           /> */}
-                      <div className="pwText">
-                        <p className="pwText1">
-                          Password must be at least 8 characters long with 1 uppercase 1 lowercase & 1 numeric character
-                        </p>
-                      </div>
-                      <div className='checkboxCont'>
-                        <Checkbox {...label} defaultChecked />
-                        <p className='remember'> Remember Me</p>
-                      </div>
-                      <Button variant="contained" startIcon={<LoginIcon />} sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20 }}
-                      onClick={() => navigate('/dashboard')}
-                      >
-                        LogIn
-                      </Button>
+                        <div className="pwText">
+                          <p className="pwText1">
+                            Password must be at least 8 characters long with 1 uppercase 1 lowercase & 1 numeric character
+                          </p>
+                        </div>
+                        <div className='checkboxCont'>
+                          <Checkbox {...label} defaultChecked />
+                          <p className='remember'> Remember Me</p>
+                        </div>
+                        <Button type='submit' variant="contained" startIcon={<LoginIcon />} sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20 }}
+                          onClick={() => { }}
+                        >
+                          LogIn
+                        </Button>
+                      </Container>
 
 
                       <Button variant="outlined" sx={{ color: '#10CFC9', width: 294, height: 40, borderRadius: 20, marginTop: 3 }}>
@@ -191,8 +227,8 @@ function Login() {
 
                       <Grid container className='fwpw'>
                         <Grid item xs={6}>
-                          <FormControl sx={{ m: 1, minWidth: 100,  }}>
-                            <InputLabel id="demo-select-small-label" style={{marginTop: -8}}>English</InputLabel>
+                          <FormControl sx={{ m: 1, minWidth: 100, }}>
+                            <InputLabel id="demo-select-small-label" style={{ marginTop: -8 }}>English</InputLabel>
                             <Select
                               labelId="demo-select-small-label"
                               id="demo-select-small"
@@ -217,7 +253,7 @@ function Login() {
                                 },
                                 borderRadius: 2
                               }}
-                              IconComponent={() => <KeyboardArrowDownIcon style={{marginRight:0,pointerEvents:'none'}}/>}
+                              IconComponent={() => <KeyboardArrowDownIcon style={{ marginRight: 0, pointerEvents: 'none' }} />}
                             >
 
                               <MenuItem value="">
@@ -229,8 +265,8 @@ function Login() {
                             </Select>
                           </FormControl>
                         </Grid>
-                        <Grid item xs={6} style={{marginTop: 15, }}>
-                          <Link href="/registration" variant="body2" className='forgotpw' style={{textDecoration: 'none',     marginLeft: 25}}>
+                        <Grid item xs={6} style={{ marginTop: 15, }}>
+                          <Link href="/registration" variant="body2" className='forgotpw' style={{ textDecoration: 'none', marginLeft: 25 }}>
                             {"Forgot password"}
                           </Link>
                         </Grid>
