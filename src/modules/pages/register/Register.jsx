@@ -101,7 +101,7 @@ function Register() {
   };
 
   const handleNext = (data) => {
-
+  //sfs
   //   {
   //     "email":"sarfaraz1@gmail.com",
   //     "password":"sushrut@123",
