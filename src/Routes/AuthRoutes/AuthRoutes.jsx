@@ -9,6 +9,7 @@ function AuthRoutes() {
   return (
     <div>
       <Routes>
+      <Route exact path='/' element={< Login />}/>
         <Route exact path='/login' element={< Login />}/>
         <Route exact path='/Registration' element={< Registration />} />
       </Routes>
