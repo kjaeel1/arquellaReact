@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import { Box, StepLabel, } from '@mui/material'
 import Paper from '@mui/material/Paper';
@@ -75,14 +76,7 @@ function Register() {
     setSelectedValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
-  };
+
 
   function getSteps() {
     return [
@@ -100,26 +94,41 @@ function Register() {
     return skippedSteps.includes(step);
   };
 
+  let registrationPayload = {};
   const handleNext = (data) => {
-  //sfs
-  //   {
-  //     "email":"sarfaraz1@gmail.com",
-  //     "password":"sushrut@123",
-  //     "careGroupName": "EOV4", 
-  //     "careGroupAddress": "D-372 10th Block near MOH snk", 
-  //     "mobile": "5685474547", 
-  //     "noOfCareHomes": "12",
-  //     "careHomeName": "Elderly Home 2", 
-  //     "careHomeAddress": "Gandhi Nagar 1", 
-  //     "rooms": "4", 
-  //     "zones": "1", 
-  //     "enSuites": "1", 
-  //     "managerName": "sarfaraz2"
-  //  }
+    registrationPayload = data;
+    console.log("step ..", activeStep);
 
-    console.log("here...", data);
+    //sfs
+    //   {
+    //     "email":"sarfaraz1@gmail.com",
+    //     "password":"sushrut@123",
+    //     "careGroupName": "EOV4", 
+    //     "careGroupAddress": "D-372 10th Block near MOH snk", 
+    //     "mobile": "5685474547", 
+    //     "noOfCareHomes": "12",
+    //     "careHomeName": "Elderly Home 2", 
+    //     "careHomeAddress": "Gandhi Nagar 1", 
+    //     "rooms": "4", 
+    //     "zones": "1", 
+    //     "enSuites": "1", 
+    //     "managerName": "sarfaraz2"
+    //  }
+    if (activeStep == 2) {
+      axios.post('http://localhost:3007/auth/register', registrationPayload)
+        .then(res => {
+          localStorage.setItem('refreshToken', res.data.refresh_token);
+          // redirect to home page or dashboard
+        })
+        .catch(error => {
+          setError(error.response.data.message);
+        });
+
+    }
+
+    console.log("here...", registrationPayload);
     if (activeStep == steps.length - 1) {
-      // axios.post('http://localhost:3007/auth/register', userPayload)
+      // axios.post('http://localhost:3007/auth/register', registrationPayload)
       // .then(res => {
       //   localStorage.setItem('refreshToken', res.data.refresh_token);
       //   // redirect to home page or dashboard
@@ -146,6 +155,17 @@ function Register() {
 
 
   };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    console.log("submit fun", {
+      email: data.get("email"),
+      password: data.get("password"),
+    });
+  };
+
+
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -219,15 +239,15 @@ function Register() {
                   <FormControl variant="outlined" style={{ width: '95%' }}>
                     <Controller
                       control={control}
-                      name="careHomeName"
+                      name="careGroupName"
                       render={({ field }) => (
                         <TextField
                           margin="normal"
                           required
                           size={'large'}
-                          id="careHomename"
+                          id="careGroupName"
                           label="Care Group Name"
-                          name="careHomename"
+                          name="careGroupName"
                           autoFocus
                           fullWidth
                           variant={'outlined'}
@@ -578,7 +598,7 @@ Next
                   <Grid item md={5}>
                     <Controller
                       control={control}
-                      name="careHomeCity"
+                      name="careHomeCountry"
                       render={({ field }) => (
                         <TextField
                           margin="normal"
@@ -732,15 +752,15 @@ Next
                   <Grid item xs={5}>
                     <Controller
                       control={control}
-                      name="NumberOfRoomsIncareHome"
+                      name="NumberOfRoomsInCareHome"
                       render={({ field }) => (
                         <TextField
                           margin="normal"
                           required
                           size={'large'}
-                          id="NumberOfRoomsIncareHome"
+                          id="NumberOfRoomsInCareHome"
                           label="Number Of Rooms"
-                          name="NumberOfRoomsIncareHome"
+                          name="NumberOfRoomsInCareHome"
                           {...field}
                           autoFocus
                           fullWidth
@@ -900,7 +920,6 @@ Next
             <FormProvider {...methods}>
               <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 5, mb: 5 }} >
 
-
                 {/* <!-------------------------------------------------------For Stepper 3 ---------------------------------------------------------------> */}
                 <Container component="main" maxWidth="lg" >
                   <Controller
@@ -1026,6 +1045,7 @@ Next
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
+                  onClick={handleNext}
                 >
                   {activeStep === steps.length - 1 ? "Submit" : "Next"}
                 </Button>
@@ -1056,21 +1076,21 @@ Next
 
   const methods = useForm({
     defaultValues: {
-      careHomeName: '',
+      careGroupName:'',
+      careHomename:'',
       careGroupAddress: '',
       careHomeAddress: '',
       careGroupCity: '',
       careGroupCountry: '',
       careGroupContactNo: '',
       careGroupEmail: '',
-      careHomeRooms: '',
       careHomeCity: '',
       careHomeCountry: '',
       careHomeContactNo: '',
       careHomeEmail: '',
       numberOfZonesInCareHome: '',
       NumberOfCommunityRoomsInCareHome: '',
-      NumberOfRoomsIncareHome: '',
+      NumberOfRoomsInCareHome: '',
       careHomeNumberOfEnSuitesInCareHome: '',
       userEmailAddress: "",
       password: "",
@@ -1173,7 +1193,7 @@ Next
                         <form onSubmit={methods.handleSubmit(handleNext)}>
                           {getStepContent(activeStep)}
 
-                          {/* <Button
+                          <Button
 
                             disabled={activeStep === 0}
                             onClick={handleBack}
@@ -1201,7 +1221,7 @@ Next
                             >
                               {activeStep === steps.length - 1 ? "Finish" : "Next"}
                             </Button>
-                          </div> */}
+                          </div>
                         </form>
                       </FormProvider>
                     </>
