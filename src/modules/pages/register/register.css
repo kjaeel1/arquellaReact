@@ -1,4 +1,4 @@
-.next {font-family: 'Mulish';
+.next {font-family: 'muli';
 font-style: normal;
 font-weight: 700;
 font-size: 12px;
@@ -8,7 +8,7 @@ line-height: 20px;
 
 
 .already {
-    font-family: 'Mulish';
+    font-family: 'muli';
 font-style: italic;
 font-weight: 400;
 font-size: 16px;
@@ -22,7 +22,7 @@ color: #29373D;
 }
 
 .login {
-    font-family: 'Mulish';
+    font-family: 'muli';
     font-style: normal;
     font-weight: 700;
     font-size: 14px;
@@ -47,7 +47,7 @@ width: 100%;
 
 .pwText1 {
  
-    font-family: 'Mulish';
+    font-family: 'muli';
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -66,7 +66,7 @@ width: 100%;
 }
 
 .dynamicText {
-    font-family: 'Mulish';
+    font-family: 'muli';
 font-style: normal;
 font-weight: 700;
 font-size: 14px;

@@ -19,7 +19,7 @@
 }
 
 .hedOne {
-    font-family: 'Mulish';
+    font-family: 'muli';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -32,7 +32,7 @@
 }
 
 .hedTwo {
-    font-family: 'Mulish';
+    font-family: 'muli';
     font-style: normal;
     font-weight: 700;
     font-size: 20px;
@@ -49,7 +49,7 @@
 }
 
 .hedOneLogo {
-    font-family: 'Mulish';
+    font-family: 'muli';
     font-style: normal;
     font-weight: 400;
     font-size: 23px;
@@ -63,7 +63,7 @@
 }
 
 .hedTwoLogo {
-    font-family: 'Mulish';
+    font-family: 'muli';
     font-style: normal;
     font-weight: 400;
     font-size: 26px;
@@ -112,7 +112,7 @@ width: 100%;
 }
 
 .pwText1 {
-    font-family: 'Mulish';
+    font-family: 'muli';
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
@@ -137,7 +137,7 @@ color: #49454F90;
 
 /* M3/body/large */
 
-font-family: 'Mulish';
+font-family: 'muli';
 font-style: normal;
 font-weight: 400;
 font-size: 16px;
@@ -163,7 +163,7 @@ height: 20px;
 
 /* M3/label/large */
 
-font-family: 'Mulish';
+font-family: 'muli'!important;
 font-style: normal;
 font-weight: 700;
 font-size: 14px;
@@ -173,10 +173,11 @@ line-height: 20px;
 display: flex;
 align-items: center;
 text-align: center;
+letter-spacing: 0.02em;
 
 /* M3/sys/light/primary */
 
-color: #10CFC9;
+color: #0EB9B3;
 
 text-decoration: inherit;
 align-items: center;
@@ -188,4 +189,22 @@ margin-left: '5%'
 .fwpw {
     margin-top: 20px;
     margin-bottom: 50px
+}
+
+.registerButton {
+    font-family: 'muli';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+/* identical to box height, or 143% */
+
+display: flex;
+align-items: center;
+text-align: center;
+letter-spacing: 0.02em;
+
+/* M3/sys/light/primary */
+
+color: #0EB9B3;
 }

@@ -427,7 +427,9 @@ Next
                 textAlign: 'center'
               }}>
                 <Button
-                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                }}
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
@@ -672,7 +674,10 @@ Next
                 textAlign: 'center'
               }}>
                 <Button
-                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  variant="contained" sx={{ 
+                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                  }}
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
@@ -850,7 +855,10 @@ Next
                 textAlign: 'center'
               }}>
                 <Button
-                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  variant="contained" sx={{ 
+                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                   }}
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
@@ -1011,7 +1019,10 @@ Next
                 textAlign: 'center'
               }}>
                 <Button
-                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  variant="contained" sx={{
+                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                   }}
                   color="primary"
                   // onClick={handleNext}
                   type="submit"

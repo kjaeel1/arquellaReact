@@ -77,6 +77,7 @@ function Login() {
 
   const handleSubmit = (event) => {
     console.log("conotrooler hittee");
+    navigate('/dashboard')
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
@@ -212,7 +213,7 @@ function Login() {
                           <Checkbox {...label} defaultChecked />
                           <p className='remember'> Remember Me</p>
                         </div>
-                        <Button type='submit' variant="contained" startIcon={<LoginIcon />} sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20 }}
+                        <Button type='submit' variant="contained" startIcon={<LoginIcon style={{color: 'white'}}/>} sx={{ background: '#0EB9B3', width: 294, height: 40, borderRadius: 20, fontFamily: 'muli', fontWeight: 700, fontSize: 14,color: '#1D192B' }}
                           onClick={() => { }}
                         >
                           LogIn
@@ -220,7 +221,9 @@ function Login() {
                       </Container>
 
 
-                      <Button variant="outlined" sx={{ color: '#10CFC9', width: 294, height: 40, borderRadius: 20, marginTop: 3 }}>
+                      <Button variant="outlined" className="registerButton" sx={{  width: 294, height: 40, borderRadius: 20, marginTop: 3 , }}
+                      onClick={() => {navigate('/registration')}}
+                      >
                         Register Now
                       </Button>
 
@@ -266,7 +269,7 @@ function Login() {
                           </FormControl>
                         </Grid>
                         <Grid item xs={6} style={{ marginTop: 15, }}>
-                          <Link href="/registration" variant="body2" className='forgotpw' style={{ textDecoration: 'none', marginLeft: 25 }}>
+                          <Link href="/Forgotpw" variant="body2" className='forgotpw' style={{ textDecoration: 'none', marginLeft: 25 }}>
                             {"Forgot password"}
                           </Link>
                         </Grid>
