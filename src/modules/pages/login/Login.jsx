@@ -172,7 +172,7 @@ function Login() {
                       height: 525,
                       // px: 2,
                       // py: 2,
-                      marginTop: 5,
+                      marginTop: 4.5,
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
@@ -259,8 +259,8 @@ function Login() {
 
                       <Grid container className='fwpw'>
                         <Grid item xs={6}>
-                          <FormControl sx={{ m: 1, minWidth: 100, }}>
-                            <InputLabel id="demo-select-small-label" style={{ marginTop: -8 }}>English</InputLabel>
+                          <FormControl sx={{ m: 1, minWidth: 100, paddingRight:' 2px'}} className='languageParentDiv'>
+                            <InputLabel id="demo-select-small-label" style={{ marginTop: -4,fontSize:'14px',fontWeight:700,lineHeight:'14px' }}>English</InputLabel>
                             <Select
                               labelId="demo-select-small-label"
                               id="demo-select-small"
@@ -270,7 +270,7 @@ function Login() {
 
                               size="small"
                               sx={{
-                                color: "white",
+                                color: "black",
                                 '.MuiOutlinedInput-notchedOutline': {
                                   borderColor: '#10CFC9',
                                 },
@@ -298,7 +298,7 @@ function Login() {
                           </FormControl>
                         </Grid>
                         <Grid item xs={6} style={{ marginTop: 15, }}>
-                          <Link href="/Forgotpw" variant="body2" className='forgotpw' style={{ textDecoration: 'none', marginLeft: 25 }}>
+                          <Link href="/Forgotpw" variant="body2" className='forgotpw' style={{ textDecoration: 'none', marginLeft: 25}}>
                             {"Forgot password"}
                           </Link>
                         </Grid>

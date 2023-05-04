@@ -12,35 +12,33 @@
 }
 
 .textWrap {
-    margin-left: 300px;
-    padding-top: 66px;
+    margin-left: 340px;
+    padding-top: 102px;
     padding-left: 80px;
 
 }
 
 .hedOne {
-    font-family: 'muli';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
+    font-family: 'Muli';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 53px;
     /* or 166% */
     color: #000000;
     margin: 0px 0px 0px 0px;
-    margin-left: 40%;
 
 }
 
 .hedTwo {
-    font-family: 'muli';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 20px;
-    line-height: 25px;
+    font-family: 'Muli';
+font-style: normal;
+font-weight: 700;
+font-size: 32px;
+line-height: 53px;
     /* or 166% */
     color: #4CC1BE;
     margin: 0px 0px 0px 0px;
-    margin-left: 40%;
 
 }
 
@@ -49,25 +47,26 @@
 }
 
 .hedOneLogo {
-    font-family: 'muli';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 23px;
+    font-family: 'Muli';
+font-style: normal;
+font-weight: 400;
+font-size: 28px;
+line-height: 36px;
     /* line-height: 25px; */
     /* identical to box height, or 129% */
     text-align: center;
     color: #000000;
     margin: 0px 0px 0px 0px;
-    margin-top: 26px
+    margin-top: 24px
 
 }
 
 .hedTwoLogo {
-    font-family: 'muli';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 26px;
-    line-height: 14px;
+    font-family: 'Muli';
+font-style: normal;
+font-weight: 400;
+font-size: 22px;
+line-height: 28px;
     /* identical to box height, or 127% */
     text-align: center;
     /* Aequella 100 */
@@ -91,10 +90,13 @@
     display: flex;
     margin-left: 22px;
     margin-bottom: 15px;
+    margin-top: 39px;
 }
 
+
+
 .logoCont {
-    margin-top: 74px;
+    margin-top: 104px;
     /* margin-left: 5%; */
 }
 
@@ -126,6 +128,7 @@ align-items: center;
 justify-content:center ;
 margin-left: 35px;
 margin-right: 35px;
+margin-top: 4px;
 /* M3/sys/light/on-surface-variant */
 
 color: #49454F90;
@@ -159,16 +162,14 @@ color: #49454F;
 }
 
 .forgotpw {
-    width: 114px;
-height: 20px;
-
+    color: #0EB9B3 !important;
 /* M3/label/large */
 
 font-family: 'muli'!important;
 font-style: normal;
-font-weight: 700;
-font-size: 14px;
-line-height: 20px;
+font-weight: 700 !important;
+font-size: 14px !important;
+line-height: 20px !important;
 /* identical to box height, or 143% */
 
 display: flex;
@@ -178,7 +179,6 @@ letter-spacing: 0.02em;
 
 /* M3/sys/light/primary */
 
-color: #0EB9B3;
 
 text-decoration: inherit;
 align-items: center;
