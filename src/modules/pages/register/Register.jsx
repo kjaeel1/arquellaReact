@@ -45,6 +45,7 @@ import IconButton from '@mui/material/IconButton';
 
 
 import logo from '../../../static/assets/images/arquellaLogoPng.png'
+import { registerUser } from '../../services/auth';
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 function Register() {
@@ -95,38 +96,32 @@ function Register() {
   };
 
   let registrationPayload = {};
-  const handleNext = (data) => {
+  const handleNext = async (data) => {
     registrationPayload = data;
     console.log("step ..", activeStep);
 
-    //sfs
-    //   {
-    //     "email":"sarfaraz1@gmail.com",
-    //     "password":"sushrut@123",
-    //     "careGroupName": "EOV4", 
-    //     "careGroupAddress": "D-372 10th Block near MOH snk", 
-    //     "mobile": "5685474547", 
-    //     "noOfCareHomes": "12",
-    //     "careHomeName": "Elderly Home 2", 
-    //     "careHomeAddress": "Gandhi Nagar 1", 
-    //     "rooms": "4", 
-    //     "zones": "1", 
-    //     "enSuites": "1", 
-    //     "managerName": "sarfaraz2"
-    //  }
+  
     if (activeStep == 2) {
-      axios.post('http://localhost:3007/auth/register', registrationPayload)
-        .then(res => {
-          localStorage.setItem('refreshToken', res.data.refresh_token);
-          // redirect to home page or dashboard
-        })
-        .catch(error => {
-          setError(error.response.data.message);
-        });
+      await registerUser(registrationPayload).then((data) => {
+        // console.log("LOGIN", JSON.stringify( data.data.refresh_token, null, 2));
+        if (data === undefined) {
+  
+          console.log("here in error");
+          openAlert();
+        } else {
+          // localStorage.setItem('refreshToken',data.data.refresh_token);
+          // navigate("/dashboard");
+          alert("hhhhhhhh")
+          
+        }
+      });
 
     }
 
-    console.log("here...", registrationPayload);
+
+ 
+
+
     if (activeStep == steps.length - 1) {
       // axios.post('http://localhost:3007/auth/register', registrationPayload)
       // .then(res => {
