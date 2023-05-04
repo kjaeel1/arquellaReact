@@ -40,6 +40,14 @@ import IconButton from '@mui/material/IconButton';
 import logo from '../../../static/assets/images/arquellaLogoPng.png'
 import axios from 'axios';
 
+
+
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 // import logo from '../../../'
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -48,8 +56,17 @@ function Login() {
   const [age, setAge] = React.useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [open, setOpen] = React.useState(false);
 
 
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
 
   const handleChange = (event) => {
@@ -75,9 +92,16 @@ function Login() {
   }));
 
 
+
+  const openAlert = () => {
+
+   
+    handleClickOpen()
+  };
+
   const handleSubmit = (event) => {
     console.log("conotrooler hittee");
-    navigate('/dashboard')
+  
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
@@ -104,9 +128,12 @@ function Login() {
       .then(res => {
         localStorage.setItem('refreshToken', res.data.refresh_token);
         // redirect to home page or dashboard
+        navigate('/dashboard')
       })
       .catch(error => {
-        setError(error.response.data.message);
+        // setError(error.response.data.message);
+        openAlert()
+      
       });
       
   };
@@ -213,7 +240,7 @@ function Login() {
                           <Checkbox {...label} defaultChecked />
                           <p className='remember'> Remember Me</p>
                         </div>
-                        <Button type='submit' variant="contained" startIcon={<LoginIcon style={{color: 'white'}}/>} sx={{ background: '#0EB9B3', width: 294, height: 40, borderRadius: 20, fontFamily: 'muli', fontWeight: 700, fontSize: 14,color: '#1D192B' }}
+                        <Button type='submit' variant="contained" startIcon={<LoginIcon style={{color: '#1D192B'}}/>} sx={{ background: '#0EB9B3', width: 294, height: 40, borderRadius: 20, fontFamily: 'muli', fontWeight: 700, fontSize: 14,color: '#1D192B' }}
                           onClick={() => { }}
                         >
                           LogIn
@@ -285,6 +312,27 @@ function Login() {
         </Grid>
       </Box>
 
+
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Entered Email id or Password is incorrect"}
+        </DialogTitle>
+        {/* <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent> */}
+        <DialogActions>
+          <Button onClick={handleClose}>Try Again</Button>
+          
+        </DialogActions>
+      </Dialog>
     </div>
 
   )

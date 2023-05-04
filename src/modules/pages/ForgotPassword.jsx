@@ -9,43 +9,14 @@ export const ForgotPassword = () => {
   return (
 
     <div> <Grid container spacing={2}>
-      <Grid item xs={6}>
-
-        <Box
-          style={{
-            backgroundImage: `url(${img})`,
-            backgroundSize: "cover",
-            height: "100vh",
-            color: "#f5f5f5"
-          }}
-        >
-          <div style={{
-            color: "red",
-            margin: '0px 0px 0px 400px',
-            padding: '90px 0px 0px 0px',
-            lineHeight: '53px'
-          }}>
-            <p style={{
-              margin: '0',
-              fontFamily: 'Muli',
-              color: '#000000',
-              fontSize: '28px',
-              fontWeight: '700'
-            }}>Smart, wireless nurse call systems.</p>
-
-            <p style={{
-              color: "#4CC1BE",
-              fontFamily: 'Muli',
-              margin: '0',
-              fontSize: '28px',
-              fontWeight: '700'
-
-            }}>Driven by data, inspired by care.</p>
-          </div>
-        </Box>
-
-
-      </Grid>
+      <Grid item  xs={12} sm={6} lg={6} className='loginImageCont'>
+            <div className='loginImageCont' >
+              <div className='textWrap'>
+                <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
+                <div><p className='hedTwo' >Driven by data, inspired by care.</p></div>
+              </div>
+            </div>
+          </Grid>
       <Grid item xs={6}>
         <div style={{
           backgroundColor: '',
@@ -100,7 +71,7 @@ export const ForgotPassword = () => {
                 padding: '0px 0px 0px 0px',
 
               }}>
-                <Button variant="contained" sx={{ borderRadius: '100px', width: '294px', backgroundColor: '#10CFC9' }}>Submit</Button>
+                <Button variant="contained" sx={{ borderRadius: '100px', width: '294px', backgroundColor: '#0EB9B3' }}>Submit</Button>
               </div>
 
               <div>
