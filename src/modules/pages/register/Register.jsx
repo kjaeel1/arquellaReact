@@ -76,7 +76,7 @@ function Register() {
     setSelectedValue(event.target.value);
   };
 
-
+//test comit
 
   function getSteps() {
     return [
@@ -1002,7 +1002,7 @@ Next
 
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
-
+           
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
