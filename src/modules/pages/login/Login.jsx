@@ -168,11 +168,11 @@ function Login() {
                   <Box
                     sx={{
                       boxShadow: 1,
-                      width: 400,
-                      // height: 707,
+                      width: 374,
+                      height: 525,
                       // px: 2,
                       // py: 2,
-                      marginTop: 8,
+                      marginTop: 5,
                       display: "flex",
                       flexDirection: "column",
                       alignItems: "center",
@@ -197,12 +197,13 @@ function Login() {
                           autoFocus
                           fullWidth
                           variant={'outlined'}
+                          style={{width: 294}}
                         />
                       </Container>
                       <br />
                       <Container component="main"   >
                         <FormControl variant="outlined" style={{ width: '100%' }}>
-                          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                          <InputLabel htmlFor="outlined-adornment-password" style={{paddingLeft: 20}}>Password</InputLabel>
                           <OutlinedInput
                             id="outlined-adornment-password"
                             name='password'
@@ -221,7 +222,8 @@ function Login() {
                               </InputAdornment>
                             }
                             label="Password"
-                            fullWidth
+                            // fullWidth
+                            style={{width: 294, justifyContent: 'center', alignContent: 'center', alignSelf: 'center'}}
                           />
 
 
@@ -237,7 +239,7 @@ function Login() {
                           </p>
                         </div>
                         <div className='checkboxCont'>
-                          <Checkbox {...label} defaultChecked />
+                          <Checkbox {...label} defaultChecked style={{color: '#0EB9B3',}} />
                           <p className='remember'> Remember Me</p>
                         </div>
                         <Button type='submit' variant="contained" startIcon={<LoginIcon style={{color: '#1D192B'}}/>} sx={{ background: '#0EB9B3', width: 294, height: 40, borderRadius: 20, fontFamily: 'muli', fontWeight: 700, fontSize: 14,color: '#1D192B' }}
@@ -248,7 +250,7 @@ function Login() {
                       </Container>
 
 
-                      <Button variant="outlined" className="registerButton" sx={{  width: 294, height: 40, borderRadius: 20, marginTop: 3 , }}
+                      <Button variant="outlined" className="registerButton" sx={{  width: 294, height: 40, borderRadius: 20, marginTop: 2 , }}
                       onClick={() => {navigate('/registration')}}
                       >
                         Register Now

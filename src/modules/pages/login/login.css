@@ -27,7 +27,7 @@
     /* or 166% */
     color: #000000;
     margin: 0px 0px 0px 0px;
-    margin-left: 45%;
+    margin-left: 40%;
 
 }
 
@@ -40,7 +40,7 @@
     /* or 166% */
     color: #4CC1BE;
     margin: 0px 0px 0px 0px;
-    margin-left: 45%;
+    margin-left: 40%;
 
 }
 
@@ -58,7 +58,7 @@
     text-align: center;
     color: #000000;
     margin: 0px 0px 0px 0px;
-    margin-top: 20px
+    margin-top: 26px
 
 }
 
@@ -73,7 +73,7 @@
     /* Aequella 100 */
     color: #10CFC9;
     margin: 0px 0px 0px 0px;
-    margin-top: 15px
+    margin-top: 8px
 
 
 }
@@ -89,7 +89,8 @@
 
 .checkboxCont{
     display: flex;
-    margin: 22px;
+    margin-left: 22px;
+    margin-bottom: 15px;
 }
 
 .logoCont {
