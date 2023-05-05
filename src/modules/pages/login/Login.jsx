@@ -145,6 +145,7 @@ function Login() {
 
                 <Container component="main" maxWidth="xs">
                   <Box
+                  className='formParentContainer'
                     sx={{
                       boxShadow: 1,
                       width: 374,
@@ -256,10 +257,11 @@ function Login() {
                             fontWeight: 700,
                             fontSize: 14,
                             color: "#1D192B",
+                            lineHeight:'20px'
                           }}
                           onClick={() => {}}
                         >
-                          LogIn
+                          <span className="loginBtnLabel" >LogIn</span>
                         </Button>
                       </Container>
 

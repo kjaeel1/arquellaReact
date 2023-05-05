@@ -209,3 +209,34 @@ letter-spacing: 0.02em;
 
 color: #0EB9B3;
 }
+
+.loginBtnLabel{
+font-family: 'Mulish';
+font-style: normal;
+font-weight: 700;
+font-size: 14px;
+line-height: 20px;
+text-align: center;
+letter-spacing: 0.02em;
+margin-top: 2px;
+}
+
+@media (max-width:1366px){
+    .textWrap{
+        margin-left: 0px;
+    }
+    .loginImageCont {
+        background-image: url(/imgBg.png);
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 900px;
+    }
+}
+
+@media (max-width:600px){
+    .formParentContainer{
+        box-shadow: none !important;
+        border: none !important;
+    }
+}
