@@ -1224,7 +1224,7 @@ function Register() {
                         <form onSubmit={methods.handleSubmit(handleNext)}>
                           {getStepContent(activeStep)}
 
-                          {/* <Button
+                          <Button
 
                             disabled={activeStep === 0}
                             onClick={handleBack}
@@ -1252,7 +1252,7 @@ function Register() {
                             >
                               {activeStep === steps.length - 1 ? "Finish" : "Next"}
                             </Button>
-                          </div> */}
+                          </div>
                         </form>
                       </FormProvider>
                     </>
