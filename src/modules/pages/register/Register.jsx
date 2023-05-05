@@ -419,22 +419,23 @@ function Register() {
 
 
 
+              </Box>
 
-                <div style={{
+              
+
+
+              <div style={{
                   textAlign: 'center',
                   marginTop: 16
                 }}>
                   <Button
-                    variant="contained" sx={{
-                      borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5,
-                      color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15,
-                    }}
-                    color="primary"
-                    onClick={handleNext}
-                    type="submit"
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
+                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  color="primary"
+                  // onClick={handleNext}
+                  type="submit"
+                >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
                 </div>
 
 
@@ -461,8 +462,6 @@ function Register() {
                     </Grid>
                   </Grid>
                 </Container>
-
-              </Box>
 
             </FormProvider>
           </Box>
@@ -681,24 +680,23 @@ function Register() {
                 </Container>
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
-                <Container component="main" maxWidth="lg" >
+
+              </Box>
+
+              
+              <Container component="main" maxWidth="lg" >
                   <div style={{
                     textAlign: 'center',
                     marginTop: 16
                   }}>
-                    <Button
-                      variant="contained" sx={{
-                        borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5,
-                        color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15,
-                      }}
-                      color="primary"
-                      onClick={handleNext}
-                      type="submit"
-                    >
-                      <span className="loginBtnLabel" >
-                        {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                      </span>
-                    </Button>
+                  <Button
+                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  color="primary"
+                  // onClick={handleNext}
+                  type="submit"
+                >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
                   </div>
                 </Container>
 
@@ -725,8 +723,6 @@ function Register() {
                     </Grid>
                   </Grid>
                 </Container>
-
-              </Box>
 
             </FormProvider>
           </Box>
@@ -872,24 +868,22 @@ function Register() {
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
 
-                <div style={{
+
+              </Box>
+
+              
+              <div style={{
                   textAlign: 'center',
                   marginTop: 16
                 }}>
-                  <Button
-                    id="customButton"
-                    variant="contained" sx={{
-                      borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5,
-                      color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15,
-                    }}
-                    color="primary"
-                    onClick={handleNext}
-                    type="submit"
-                  >
-                    <span className="loginBtnLabel" >
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </span>
-                  </Button>
+                 <Button
+                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  color="primary"
+                  // onClick={handleNext}
+                  type="submit"
+                >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
                 </div>
 
 
@@ -915,8 +909,6 @@ function Register() {
                     </Grid>
                   </Grid>
                 </Container>
-
-              </Box>
 
             </FormProvider>
           </Box>
@@ -1044,24 +1036,24 @@ function Register() {
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
 
-                <div style={{
+             
+
+
+              </Box>
+
+              <div style={{
                   textAlign: 'center',
                   marginTop: 16
                 }}>
-                  <Button
-                    variant="contained" sx={{
-                      borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5,
-                      color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15,
-                    }}
-                    color="primary"
-                    // onClick={handleNext}
-                    type="submit"
-                    onClick={handleNext}
-                  >
-                    <span className="loginBtnLabel" >
-                      {activeStep === steps.length - 1 ? "Submit" : "Next"}
-                    </span>
-                  </Button>
+                   <Button
+                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#10CFC9', marginBottom: 5 }}
+                  color="primary"
+                  // onClick={handleNext}
+                  type="submit"
+                  onClick={handleNext}
+                >
+                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                </Button>
                 </div>
 
                 <Container component="main" maxWidth="lg" >
@@ -1086,9 +1078,6 @@ function Register() {
                     </Grid>
                   </Grid>
                 </Container>
-
-
-              </Box>
 
             </FormProvider>
           </Box>
@@ -1216,6 +1205,8 @@ function Register() {
                     })}
                   </Stepper>
 
+              
+
                   <p className="dynamicText">
                     {activeStep === 0 ? ' Basic Information' : ''}
                     {activeStep === 1 ? ' Care Home Details' : ''}
@@ -1233,7 +1224,7 @@ function Register() {
                         <form onSubmit={methods.handleSubmit(handleNext)}>
                           {getStepContent(activeStep)}
 
-                          {/* <Button
+                          <Button
 
                             disabled={activeStep === 0}
                             onClick={handleBack}
@@ -1261,7 +1252,7 @@ function Register() {
                             >
                               {activeStep === steps.length - 1 ? "Finish" : "Next"}
                             </Button>
-                          </div> */}
+                          </div>
                         </form>
                       </FormProvider>
                     </>
