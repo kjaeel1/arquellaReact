@@ -104,6 +104,16 @@ margin-left:  '25%';
     .formContent {
        margin-left: '20%';
     }
+    .leftImgContainer{
+        display: block !important;
+    }
+    .formRegisterParentDiv{
+        box-shadow: none !important;
+        border: none !important;
+    }
+    .fullWidthDiv{
+        width: 100% !important;
+    }
   }
 
  
