@@ -3,21 +3,21 @@ import '../../static/css/forgotPass.css'
 import { Box, Button, Grid, TextField } from '@mui/material'
 import img from '../../static/assets/images/loginpagePic.png'
 import logo from '../../static/assets/images/arquellaLogoPng.png'
-
+import Link from "@mui/material/Link";
 
 export const ForgotPassword = () => {
   return (
 
     <div> <Grid container spacing={2}>
-      <Grid item  xs={12} sm={6} lg={6} className='loginImageCont'>
-            <div className='loginImageCont' >
-              <div className='textWrap'>
-                <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
-                <div><p className='hedTwo' >Driven by data, inspired by care.</p></div>
-              </div>
-            </div>
-          </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={12} sm={6} lg={6} className='loginImageCont'>
+        <div className='loginImageCont' >
+          <div className='textWrap'>
+            <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
+            <div><p className='hedTwo' >Driven by data, inspired by care.</p></div>
+          </div>
+        </div>
+      </Grid>
+      <Grid item xs={12} sm={6} lg={6}>
         <div style={{
           backgroundColor: '',
           backgroundSize: "cover",
@@ -71,18 +71,28 @@ export const ForgotPassword = () => {
                 padding: '0px 0px 0px 0px',
 
               }}>
-                <Button variant="contained" sx={{ borderRadius: '100px', width: '294px', backgroundColor: '#0EB9B3' }}>Submit</Button>
+                <Button variant="contained" sx={{ borderRadius: '100px', width: '294px', backgroundColor: '#0EB9B3' }}>
+                  
+                  <span className='loginBtnLabel' >
+                    Submit
+                    </span></Button>
               </div>
+
+
 
               <div>
                 <p style={{
                   color: "#10CFC9",
-                  fontFamily: 'Muli',
+                  fontFamily: 'Muli!important',
                   margin: '0',
                   fontSize: '14px',
                   fontWeight: '700'
 
-                }}>Back to login </p>
+                }}>
+
+                  <Link
+                    href="/Login">Back to login
+                  </Link> </p>
               </div>
 
             </div>

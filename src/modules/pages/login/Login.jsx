@@ -99,6 +99,7 @@ function Login() {
     };
 
     await logInWithEmailAndPassword(userPayload).then((data) => {
+      navigate("/dashboard");
       // console.log("LOGIN", JSON.stringify( data.data.refresh_token, null, 2));
       if (data === undefined) {
 
