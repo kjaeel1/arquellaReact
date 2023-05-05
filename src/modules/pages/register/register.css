@@ -53,7 +53,7 @@ width: 100%;
     font-size: 12px;
     line-height: 16px;
     /* or 133% */
-    
+    margin-top: 8px;
     
     /* M3/sys/light/on-surface-variant */
     
@@ -80,7 +80,21 @@ text-align: center; */
 /* Aequella 100 */
 
 color: #10CFC9;
+margin-top: 8px;
+margin-left:  '25%';
 }
+
+.loginBtnLabel{
+    font-family: 'Mulish';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.02em;
+    margin-top: 2px;
+    }
+    
 
 @media only screen and (max-width: 820px) {
     .loginImageCont{

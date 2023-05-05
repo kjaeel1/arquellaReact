@@ -29,9 +29,7 @@ export const logInWithEmailAndPassword = async (
   )=> {
    console.log("- - - - -  --- - - -",registrationPayload)
     try {
-  
-     
-    
+
         const response = await 
   
         axios.post(Apiurl+'register', registrationPayload)

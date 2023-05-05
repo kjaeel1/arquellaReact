@@ -183,23 +183,24 @@ function Register() {
           <Box
             sx={{
               boxShadow: 1,
-              // width: 374,
+              width: 396,
               // height: 707,
               // px: 2,
               // py: 2,
-              marginTop: 3,
+              marginTop: 2,
               display: "flex",
               flexDirection: "column",
               // alignItems: "center",
               borderRadius: 5,
               border: '1px solid #888C8C',
-              // alignContent: 'center',
-              // alignSelf: 'center',
+              alignContent: 'center',
+              alignSelf: 'center',
+              marginLeft: -3
 
             }}
           >
             <FormProvider  {...methods}>
-              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 5, mb: 5 }} >
+              <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 5, mb: 5 ,}} >
                 <FormControl>
 
                   <RadioGroup
@@ -230,23 +231,24 @@ function Register() {
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
 
-                <Container component="main" maxWidth="lg" >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                <Container component="main" maxWidth="lg" style={{alignContent: 'center', alignItems: 'center'}}>
+                  <FormControl variant="outlined" style={{ width: '100%', marginTop: 15 }}>
                     <Controller
                       control={control}
                       name="careGroupName"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careGroupName"
                           label="Care Group Name"
                           name="careGroupName"
                           autoFocus
-                          fullWidth
+                          // fullWidth
                           variant={'outlined'}
                           {...field}
+                          // style={{width: 316, }}
                         />
                       )}
                     />
@@ -255,14 +257,14 @@ function Register() {
 
 
 
-                <Container component="main" maxWidth="lg" >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                <Container component="main" maxWidth="lg" style={{alignContent: 'center', alignItems: 'center'}}>
+                  <FormControl variant="outlined" style={{ width: '100%' }}>
                     <Controller
                       control={control}
                       name="noOfHomes"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="noOfHomes"
@@ -273,6 +275,7 @@ function Register() {
                           fullWidth
                           variant={'outlined'}
                           {...field}
+                          // style={{width: 316,paddingRight: 20 }}
                         />
                       )}
                     />
@@ -280,14 +283,14 @@ function Register() {
                   </FormControl>
                 </Container>
 
-                <Container component="main"   >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                <Container component="main"   maxWidth="lg"  style={{alignContent: 'center', alignItems: 'center'}}>
+                  <FormControl variant="outlined" style={{ width: '100%' }}>
                     <Controller
                       control={control}
                       name="careGroupAddress"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careGroupAddress"
@@ -297,25 +300,28 @@ function Register() {
                           // autoFocus
                           fullWidth
                           variant={'outlined'}
+                          // style={{width: 316,paddingRight: 20 }}
                         />
                       )}
                     />
                   </FormControl>
                 </Container>
 
-                <Grid container spacing={3}
+                <Container component="main" maxWidth="lg" >
+                <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
                 // style={{ minHeight: '100vh' }}
                 >
-                  <Grid item md={5}>
+                  
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careGroupCity"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careGroupCity"
@@ -323,20 +329,21 @@ function Register() {
                           name="careGroupCity"
                           {...field}
                           // autoFocus
-                          fullWidth
+                          // fullWidth
                           variant={'outlined'}
+                          
                         />
                       )}
                     />
 
                   </Grid>
-                  <Grid item md={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careGroupCountry"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careGroupCountry"
@@ -344,7 +351,7 @@ function Register() {
                           name="careGroupCountry"
                           {...field}
                           // autoFocus
-                          fullWidth
+                          // fullWidth
                           variant={'outlined'}
                         />
                       )}
@@ -352,20 +359,24 @@ function Register() {
 
                   </Grid>
                 </Grid>
+                </Container>
 
+
+
+                <Container component="main" maxWidth="lg" >                        
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
                 // style={{ minHeight: '100vh' }}
                 >
-                  <Grid item xs={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careGroupContactNo"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="cno"
@@ -380,13 +391,13 @@ function Register() {
                     />
 
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careGroupEmail"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="email"
@@ -402,25 +413,36 @@ function Register() {
 
                   </Grid>
                 </Grid>
+                </Container>
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
 
+         
 
+                    <div style={{
+                textAlign: 'center',
+                marginTop: 16
+              }}>
+                <Button
+                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                }}
+                  color="primary"
+                  onClick={handleNext}
+                  type="submit"
+                >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                </Button>
+              </div>
+            
 
-
-                {/* <Button variant="contained" sx={{ background: '#10CFC9', width: 294, height: 40, borderRadius: 20, mt: 3 }}
-className='next'
->
-Next
-</Button> */}
-
-
-
-                <Grid container spacing={2}
+              <Container component="main" maxWidth="lg" >  
+                      
+                <Grid container spacing={0}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
-                // style={{ minHeight: '100vh' }}
+                style={{ marginTop: -12 }}
                 >
                   <Grid item xs={8}>
 
@@ -436,22 +458,10 @@ Next
                     </Link>
                   </Grid>
                 </Grid>
+                </Container>
 
               </Box>
-              <div style={{
-                textAlign: 'center'
-              }}>
-                <Button
-                  variant="contained" sx={{ borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
-                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
-                }}
-                  color="primary"
-                  // onClick={handleNext}
-                  type="submit"
-                >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                </Button>
-              </div>
+          
             </FormProvider>
           </Box>
         </Container>
@@ -468,18 +478,19 @@ Next
           <Box
             sx={{
               boxShadow: 1,
-              // width: 374,
+              width: 396,
               // height: 707,
               // px: 2,
               // py: 2,
-              marginTop: 3,
+              marginTop: 2,
               display: "flex",
               flexDirection: "column",
               // alignItems: "center",
               borderRadius: 5,
               border: '1px solid #888C8C',
-              // alignContent: 'center',
-              // alignSelf: 'center',
+              alignContent: 'center',
+              alignSelf: 'center',
+              marginLeft: -3
 
             }}
           >
@@ -514,13 +525,13 @@ Next
 
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
                 <Container component="main" maxWidth="lg" >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                <FormControl variant="outlined" style={{ width: '100%', marginTop: 15 }}>
                     <Controller
                       control={control}
                       name="careHomename"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careHomename"
@@ -539,13 +550,13 @@ Next
                 </Container>
 
                 <Container component="main"   >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                  <FormControl variant="outlined" style={{ width: '100%' }}>
                     <Controller
                       control={control}
                       name="careHomeAddress"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careHomeAddress"
@@ -562,20 +573,20 @@ Next
                 </Container>
 
 
-
-                <Grid container spacing={3}
+                <Container component="main" maxWidth="lg" >
+                <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
                 // style={{ minHeight: '100vh' }}
                 >
-                  <Grid item md={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careHomeCity"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careHomeCity"
@@ -590,13 +601,13 @@ Next
                     />
 
                   </Grid>
-                  <Grid item md={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careHomeCountry"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careHomeCountry"
@@ -611,20 +622,22 @@ Next
                     />
                   </Grid>
                 </Grid>
+                </Container>
 
+                <Container component="main" maxWidth="lg" >
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
                 // style={{ minHeight: '100vh' }}
                 >
-                  <Grid item xs={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careHomeContactNo"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="cno"
@@ -639,13 +652,13 @@ Next
                     />
 
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="careHomeEmail"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careHomeEmail"
@@ -661,13 +674,37 @@ Next
 
                   </Grid>
                 </Grid>
+                </Container>
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
+                <Container component="main" maxWidth="lg" >  
+                <div style={{
+                textAlign: 'center',
+                marginTop: 16
+              }}>
+                <Button
+                  variant="contained" sx={{ 
+                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                  }}
+                  color="primary"
+                  onClick={handleNext}
+                  type="submit"
+                >
+                     <span className="loginBtnLabel" >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </span>
+                </Button>
+              </div>
+              </Container>
+
+              
+              <Container component="main" maxWidth="lg" >  
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
-                // style={{ minHeight: '100vh' }}
+                  style={{ marginTop: -21 }}
                 >
                   <Grid item xs={8}>
 
@@ -683,23 +720,10 @@ Next
                     </Link>
                   </Grid>
                 </Grid>
+                </Container>
 
               </Box>
-              <div style={{
-                textAlign: 'center'
-              }}>
-                <Button
-                  variant="contained" sx={{ 
-                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
-                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
-                  }}
-                  color="primary"
-                  // onClick={handleNext}
-                  type="submit"
-                >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                </Button>
-              </div>
+            
             </FormProvider>
           </Box>
         </Container>
@@ -718,18 +742,19 @@ Next
           <Box
             sx={{
               boxShadow: 1,
-              // width: 374,
+              width: 396,
               // height: 707,
               // px: 2,
               // py: 2,
-              marginTop: 3,
+              marginTop: 2,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              // alignItems: "center",
               borderRadius: 5,
               border: '1px solid #888C8C',
               alignContent: 'center',
               alignSelf: 'center',
+              marginLeft: -3
 
             }}
           >
@@ -738,19 +763,20 @@ Next
 
 
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
+                <Container component="main" maxWidth="lg" >
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
                 // style={{ minHeight: '100vh' }}
                 >
-                  <Grid item xs={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="NumberOfRoomsInCareHome"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="NumberOfRoomsInCareHome"
@@ -765,13 +791,13 @@ Next
                     />
 
                   </Grid>
-                  <Grid item xs={5}>
+                  <Grid item md={6}>
                     <Controller
                       control={control}
                       name="numberOfZonesInCareHome"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="numberOfZonesInCareHome"
@@ -788,14 +814,16 @@ Next
                   </Grid>
                 </Grid>
 
-                <Container component="main"   >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                </Container>
+
+                <Container component="main"  maxWidth="lg" >
+                  <FormControl variant="outlined" style={{ width: '100%' }}>
                     <Controller
                       control={control}
                       name="NumberOfCommunityRoomsInCareHome"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="NumberOfCommunityRoomsInCareHome"
@@ -813,14 +841,14 @@ Next
                   </FormControl>
                 </Container>
 
-                <Container component="main"   >
-                  <FormControl variant="outlined" style={{ width: '95%' }}>
+                <Container component="main" maxWidth="lg"  >
+                  <FormControl variant="outlined" style={{ width: '100%' }}>
                     <Controller
                       control={control}
                       name="careHomeNumberOfEnSuitesInCareHome"
                       render={({ field }) => (
                         <TextField
-                          margin="normal"
+                          margin="dense"
                           required
                           size={'large'}
                           id="careHomeNumberOfEnSuitesInCareHome"
@@ -840,15 +868,33 @@ Next
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
 
+                <div style={{
+                textAlign: 'center',
+                marginTop: 16
+              }}>
+                <Button
+                id="customButton"
+                  variant="contained" sx={{ 
+                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                   }}
+                  color="primary"
+                  onClick={handleNext}
+                  type="submit"
+                >
+                     <span className="loginBtnLabel" >
+                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </span>
+                </Button>
+              </div>
 
 
-
-
+                <Container component="main" maxWidth="lg" >
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
-                // style={{ minHeight: '100vh' }}
+                style={{ marginTop: -21 }}
                 >
                   <Grid item xs={8}>
 
@@ -864,23 +910,10 @@ Next
                     </Link>
                   </Grid>
                 </Grid>
+                </Container>
 
               </Box>
-              <div style={{
-                textAlign: 'center'
-              }}>
-                <Button
-                  variant="contained" sx={{ 
-                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
-                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
-                   }}
-                  color="primary"
-                  // onClick={handleNext}
-                  type="submit"
-                >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                </Button>
-              </div>
+             
             </FormProvider>
           </Box>
         </Container>
@@ -897,18 +930,19 @@ Next
           <Box
             sx={{
               boxShadow: 1,
-              // width: 374,
+              width: 396,
               // height: 707,
               // px: 2,
               // py: 2,
-              marginTop: 3,
+              marginTop: 2,
               display: "flex",
               flexDirection: "column",
-              alignItems: "center",
+              // alignItems: "center",
               borderRadius: 5,
               border: '1px solid #888C8C',
               alignContent: 'center',
               alignSelf: 'center',
+              marginLeft: -3
 
             }}
           >
@@ -922,7 +956,7 @@ Next
                     name="userEmailAddress"
                     render={({ field }) => (
                       <TextField
-                        margin="normal"
+                        margin="dense"
                         required
                         size={'large'}
                         id="userEmailAddress"
@@ -979,11 +1013,11 @@ Next
                 </div>
 
                 <Container component="main"   >
-                  <FormControl variant="outlined" style={{ width: '100%' }}>
+                  <FormControl variant="outlined" style={{ width: '100%', marginTop: 16 }}>
                     <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                     <OutlinedInput
                       id="outlined-adornment-password"
-
+                      
                       type={showPassword1 ? 'text' : 'password'}
                       endAdornment={
                         <InputAdornment position="end">
@@ -1006,11 +1040,32 @@ Next
                 {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
 
 
+                <div style={{
+                textAlign: 'center',
+                marginTop: 16
+              }}>
+                <Button
+                  variant="contained" sx={{
+                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
+                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
+                   }}
+                  color="primary"
+                  // onClick={handleNext}
+                  type="submit"
+                  onClick={handleNext}
+                >
+                    <span className="loginBtnLabel" >
+                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
+                  </span>
+                </Button>
+              </div>
+
+                <Container component="main"  maxWidth="lg" >
                 <Grid container spacing={2}
                   direction="row"
                   alignItems="center"
                   justifyContent="center"
-                // style={{ minHeight: '100vh' }}
+                style={{ marginTop: -31 }}
                 >
                   <Grid item xs={8}>
 
@@ -1026,25 +1081,11 @@ Next
                     </Link>
                   </Grid>
                 </Grid>
+                </Container>
 
 
               </Box>
-              <div style={{
-                textAlign: 'center'
-              }}>
-                <Button
-                  variant="contained" sx={{
-                    borderRadius: '40px', width: '294px', backgroundColor: '#0EB9B3', marginBottom: 5, 
-                color: 'black', fontFamily: 'muli', fontWeight: 700, fontSize: 15, 
-                   }}
-                  color="primary"
-                  // onClick={handleNext}
-                  type="submit"
-                  onClick={handleNext}
-                >
-                  {activeStep === steps.length - 1 ? "Submit" : "Next"}
-                </Button>
-              </div>
+             
             </FormProvider>
           </Box>
         </Container>
@@ -1098,8 +1139,8 @@ Next
   return (
     <div className=''>
       <Box sx={{ flexGrow: 1 }} xs={12} md={12} ls={12} >
-        <Grid container spacing={0} >
-          <Grid item xs={6} md={6} ls={6} >
+      <Grid container spacing={0} xs={12} sm={12} lg={12}>
+            <Grid item xs={12} sm={6} lg={6} className="loginImageCont">
             <div className='loginImageCont' >
               <div className='textWrap'>
                 <div><p className='hedOne'>Smart, wireless nurse call systems.</p></div>
@@ -1121,7 +1162,7 @@ Next
 
 
                 <Container component="main" maxWidth="xs" >
-                  <Stepper alternativeLabel activeStep={activeStep}>
+                  <Stepper alternativeLabel activeStep={activeStep} >
                     {steps.map((step, index) => {
                       const labelProps = {};
                       const stepProps = {};
@@ -1141,7 +1182,7 @@ Next
                       }
                       return (
 
-                        <Step {...stepProps} key={index} style={{ marginTop: 20 }}
+                        <Step {...stepProps} key={index} style={{ marginTop: 16 }}
                           sx={{
                             '& .MuiStepLabel-root .Mui-completed': {
                               color: '#10CFC9', // circle color (COMPLETED)
