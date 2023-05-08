@@ -44,16 +44,19 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { logInWithEmailAndPassword } from "../../services/auth";
 
-// import logo from '../../../'
+import validator from 'validator'
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function Login() {
   const [age, setAge] = React.useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [open, setOpen] = React.useState(false);
 
+  const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
+  const [emailError, setEmailError] = useState('')
+  const [text, setText] = useState("");
+  const [password, setPassword] = useState("");
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -61,6 +64,19 @@ function Login() {
   const handleClose = () => {
     setOpen(false);
   };
+
+
+
+  const handleClickOpen1 = () => {
+    setOpen1(true);
+  };
+
+  const handleClose1 = () => {
+    setOpen1(false);
+  };
+
+
+
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -88,6 +104,11 @@ function Login() {
     handleClickOpen();
   };
 
+  const openAlert1 = () => {
+    handleClickOpen1();
+  };
+
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -98,20 +119,64 @@ function Login() {
       password: data.get("password"),
     };
 
-    await logInWithEmailAndPassword(userPayload).then((data) => {
-      navigate("/dashboard");
-      // console.log("LOGIN", JSON.stringify( data.data.refresh_token, null, 2));
-      if (data === undefined) {
+  
 
-        console.log("here in error");
+    if (text ==='' || password.length === 0) {
+
+      console.log("here in error11");
+      openAlert1();
+    }
+     else {
+      
+    await logInWithEmailAndPassword(userPayload).then((data) => {
+ 
+  
+      console.log("here in away");
+      if (data === undefined ) {
+
+      
         openAlert();
-      } else {
+      } 
+      else {
+        console.log(JSON.stringify(data, null, 2))
         localStorage.setItem('refreshToken',data.data.refresh_token);
         navigate("/dashboard");
+     
         
       }
-    });
+    
+ 
+  });
+    } 
+
+
   };
+
+  const validateEmail = (e) => {
+
+    var email = e.target.value
+
+    setText(email)
+
+    if (email === '' || undefined) {
+      setEmailError('Enter something)')
+    }
+      
+    if (validator.isEmail(email)) {
+      setEmailError('Valid Email :)')
+    } 
+    else {
+      setEmailError('Enter valid Email!')
+    }
+  }
+
+  const validatePw = (e) => {
+    console.log("-----------------------------------------------", e.target.value)
+    var password = e.target.value
+
+    setPassword(password)
+  
+  }
 
   return (
     <div>
@@ -182,9 +247,11 @@ function Login() {
                           fullWidth
                           variant={"outlined"}
                           style={{ width: 294 }}
+                          onChange={(text) => validateEmail(text)}
                         />
                       </Container>
-                      <br />
+                  
+                    
                       <Container component="main">
                         <FormControl
                           variant="outlined"
@@ -200,6 +267,7 @@ function Login() {
                             id="outlined-adornment-password"
                             name="password"
                             type={showPassword ? "text" : "password"}
+                            onChange={(e) => validatePw(e)}
                             endAdornment={
                               <InputAdornment position="end">
                                 <IconButton
@@ -237,6 +305,16 @@ function Login() {
                             uppercase 1 lowercase & 1 numeric character
                           </p>
                         </div>
+                            <span style={{
+                        fontWeight: 'bold',
+                        color: 'red',
+                        fontSize: 14,
+                        fontFamily: 'muli',
+                        marginTop: 10
+                       
+                      }}>
+                        {emailError}
+                        </span>
                         <div className="checkboxCont">
                           <Checkbox
                             {...label}
@@ -360,6 +438,7 @@ function Login() {
           </Grid>
         </Grid>
       </Box>
+    
 
       <Dialog
         open={open}
@@ -378,6 +457,29 @@ function Login() {
         </DialogContent> */}
         <DialogActions>
           <Button onClick={handleClose}>Try Again</Button>
+        </DialogActions>
+      </Dialog>
+
+
+
+      
+      <Dialog
+        open={open1}
+        onClose={handleClose1}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Enter Email id or Password "}
+        </DialogTitle>
+        {/* <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            Let Google help apps determine location. This means sending anonymous
+            location data to Google, even when no apps are running.
+          </DialogContentText>
+        </DialogContent> */}
+        <DialogActions>
+          <Button onClick={handleClose1}>Try Again</Button>
         </DialogActions>
       </Dialog>
     </div>
