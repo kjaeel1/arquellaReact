@@ -144,8 +144,8 @@ function Register() {
   };
 
   const handleChange1 = event => {
-    setCareGroupName(event.target.value)
-
+    setCareGroupName(event)
+      console.log(event)
     
   };
 
@@ -242,7 +242,7 @@ function Register() {
                           variant={"outlined"}
                           {...field}
                           // style={{width: 316, }}
-                          onChange={handleChange1()}
+                          // onChange={(e) =>handleChange1(e)}
                         />
                       )}
                     />
