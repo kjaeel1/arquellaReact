@@ -144,8 +144,8 @@ function Register() {
   };
 
   const handleChange1 = event => {
-    setCareGroupName(event)
-      console.log(event)
+    // setCareGroupName(event)
+      console.log(event.target.value)
     
   };
 
@@ -225,6 +225,7 @@ function Register() {
                   <FormControl
                     variant="outlined"
                     style={{ width: "100%", marginTop: 15 }}
+                    required
                   >
                     <Controller
                       control={control}
@@ -242,7 +243,7 @@ function Register() {
                           variant={"outlined"}
                           {...field}
                           // style={{width: 316, }}
-                          // onChange={(e) =>handleChange1(e)}
+                          onChange={(e) =>handleChange1(e)}
                         />
                       )}
                     />
@@ -1240,7 +1241,7 @@ function Register() {
                         <form onSubmit={methods.handleSubmit(handleNext)}>
                           {getStepContent(activeStep)}
 
-                          {/* <Button
+                          <Button
 
                             disabled={activeStep === 0}
                             onClick={handleBack}
@@ -1268,7 +1269,7 @@ function Register() {
                             >
                               {activeStep === steps.length - 1 ? "Finish" : "Next"}
                             </Button>
-                          </div> */}
+                          </div>
                         </form>
                       </FormProvider>
                     </>
