@@ -44,6 +44,7 @@ import IconButton from "@mui/material/IconButton";
 
 import logo from "../../../static/assets/images/arquellaLogoPng.png";
 import { registerUser } from "../../services/auth";
+import { CleaningServices } from "@mui/icons-material";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function Register() {
@@ -60,6 +61,31 @@ function Register() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
+
+  const methods = useForm({
+    defaultValues: {
+      careGroupName: "",
+      careHomename: "",
+      careGroupAddress: "",
+      careHomeAddress: "",
+      careGroupCity: "",
+      careGroupCountry: "",
+      careGroupContactNo: "",
+      careGroupEmail: "",
+      careHomeCity: "",
+      careHomeCountry: "",
+      careHomeContactNo: "",
+      careHomeEmail: "",
+      numberOfZonesInCareHome: "",
+      NumberOfCommunityRoomsInCareHome: "",
+      NumberOfRoomsInCareHome: "",
+      careHomeNumberOfEnSuitesInCareHome: "",
+      userEmailAddress: "",
+      password: "",
+    },
+  });
+
+  console.log(methods.formState.errors)
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -83,6 +109,7 @@ function Register() {
 
   let registrationPayload = {};
   const handleNext = async (data) => {
+    console.log(data)
     registrationPayload = data;
     console.log("step ..", activeStep);
 
@@ -116,10 +143,20 @@ function Register() {
       //     setActiveStep(activeStep + 1);
       //   });
     } else {
-      setActiveStep(activeStep + 1);
-      setSkippedSteps(
-        skippedSteps.filter((skipItem) => skipItem !== activeStep)
-      );
+      if (data.careHomename == '') {
+        console.log("condition run");
+        // setActiveStep(activeStep - 1);
+        setSelectedValue('b');
+
+      }
+
+      if (data.careHomename !== '') {
+
+        setActiveStep(activeStep + 1);
+        setSkippedSteps(
+          skippedSteps.filter((skipItem) => skipItem !== activeStep)
+        );
+      }
     }
   };
 
@@ -145,8 +182,8 @@ function Register() {
 
   const handleChange1 = event => {
     // setCareGroupName(event)
-      console.log(event.target.value)
-    
+    console.log(event.target.value)
+
   };
 
   const Step1a = () => {
@@ -177,7 +214,7 @@ function Register() {
               <Box
                 component="form"
                 onSubmit={handleSubmit}
-                
+
                 sx={{ mt: 5, mb: 5 }}
               >
                 <FormControl>
@@ -230,10 +267,12 @@ function Register() {
                     <Controller
                       control={control}
                       name="careGroupName"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
                           required
+                          error={!!methods.formState.errors.careGroupName}
                           size={"large"}
                           id="careGroupName"
                           label="Care Group Name"
@@ -243,7 +282,7 @@ function Register() {
                           variant={"outlined"}
                           {...field}
                           // style={{width: 316, }}
-                          onChange={(e) =>handleChange1(e)}
+                          helperText={!!methods.formState.errors.careGroupName && 'Enter the required field'}
                         />
                       )}
                     />
@@ -259,6 +298,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="noOfHomes"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
@@ -271,7 +311,9 @@ function Register() {
                           fullWidth
                           variant={"outlined"}
                           {...field}
-                          // style={{width: 316,paddingRight: 20 }}
+                          error={!!methods.formState.errors.noOfHomes}
+                          helperText={!!methods.formState.errors.noOfHomes && 'Enter the required field'}
+                        // style={{width: 316,paddingRight: 20 }}
                         />
                       )}
                     />
@@ -287,6 +329,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="careGroupAddress"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
@@ -299,7 +342,9 @@ function Register() {
                           // autoFocus
                           fullWidth
                           variant={"outlined"}
-                          // style={{width: 316,paddingRight: 20 }}
+                          error={!!methods.formState.errors.careGroupAddress}
+                          helperText={!!methods.formState.errors.careGroupAddress && 'Enter the required field'}
+                        // style={{width: 316,paddingRight: 20 }}
                         />
                       )}
                     />
@@ -313,12 +358,13 @@ function Register() {
                     direction="row"
                     alignItems="center"
                     justifyContent="center"
-                    // style={{ minHeight: '100vh' }}
+                  // style={{ minHeight: '100vh' }}
                   >
                     <Grid item md={6} className="fullWidthDiv">
                       <Controller
                         control={control}
                         name="careGroupCity"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -331,6 +377,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careGroupCity}
+                          helperText={!!methods.formState.errors.careGroupCity && 'Enter the required field'}
                           />
                         )}
                       />
@@ -339,6 +387,7 @@ function Register() {
                       <Controller
                         control={control}
                         name="careGroupCountry"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -351,6 +400,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careGroupCountry}
+                            helperText={!!methods.formState.errors.careGroupCountry && 'Enter the required field'}
                           />
                         )}
                       />
@@ -365,12 +416,13 @@ function Register() {
                     direction="row"
                     alignItems="center"
                     justifyContent="center"
-                    // style={{ minHeight: '100vh' }}
+                  // style={{ minHeight: '100vh' }}
                   >
                     <Grid item md={6} className="fullWidthDiv">
                       <Controller
                         control={control}
                         name="careGroupContactNo"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -383,6 +435,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careGroupContactNo}
+                            helperText={!!methods.formState.errors.careGroupContactNo && 'Enter the required field'}
                           />
                         )}
                       />
@@ -391,6 +445,7 @@ function Register() {
                       <Controller
                         control={control}
                         name="careGroupEmail"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -403,6 +458,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careGroupEmail}
+                            helperText={!!methods.formState.errors.careGroupEmail && 'Enter the required field'}
                           />
                         )}
                       />
@@ -537,6 +594,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="careHomename"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
@@ -549,6 +607,8 @@ function Register() {
                           autoFocus
                           fullWidth
                           variant={"outlined"}
+                          error={!!methods.formState.errors.careHomename}
+                          helperText={!!methods.formState.errors.careHomename && 'Enter the required field'}
                         />
                       )}
                     />
@@ -560,6 +620,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="careHomeAddress"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
@@ -572,6 +633,8 @@ function Register() {
                           // autoFocus
                           fullWidth
                           variant={"outlined"}
+                          error={!!methods.formState.errors.careHomeAddress}
+                          helperText={!!methods.formState.errors.careHomeAddress && 'Enter the required field'}
                         />
                       )}
                     />
@@ -585,12 +648,13 @@ function Register() {
                     direction="row"
                     alignItems="center"
                     justifyContent="center"
-                    // style={{ minHeight: '100vh' }}
+                  // style={{ minHeight: '100vh' }}
                   >
                     <Grid item sm={12} md={6}>
                       <Controller
                         control={control}
                         name="careHomeCity"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -603,6 +667,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careHomeCity}
+                            helperText={!!methods.formState.errors.careHomeCity && 'Enter the required field'}
                           />
                         )}
                       />
@@ -611,6 +677,7 @@ function Register() {
                       <Controller
                         control={control}
                         name="careHomeCountry"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -623,6 +690,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careHomeCountry}
+                            helperText={!!methods.formState.errors.careHomeCountry && 'Enter the required field'}
                           />
                         )}
                       />
@@ -637,12 +706,13 @@ function Register() {
                     direction="row"
                     alignItems="center"
                     justifyContent="center"
-                    // style={{ minHeight: '100vh' }}
+                  // style={{ minHeight: '100vh' }}
                   >
                     <Grid item md={6}>
                       <Controller
                         control={control}
                         name="careHomeContactNo"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -655,6 +725,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careHomeContactNo}
+                            helperText={!!methods.formState.errors.careHomeContactNo && 'Enter the required field'}
                           />
                         )}
                       />
@@ -663,6 +735,7 @@ function Register() {
                       <Controller
                         control={control}
                         name="careHomeEmail"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -675,6 +748,8 @@ function Register() {
                             // autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.careHomeEmail}
+                            helperText={!!methods.formState.errors.careHomeEmail && 'Enter the required field'}
                           />
                         )}
                       />
@@ -775,12 +850,13 @@ function Register() {
                     direction="row"
                     alignItems="center"
                     justifyContent="center"
-                    // style={{ minHeight: '100vh' }}
+                  // style={{ minHeight: '100vh' }}
                   >
                     <Grid item md={6}>
                       <Controller
                         control={control}
                         name="NumberOfRoomsInCareHome"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -793,6 +869,8 @@ function Register() {
                             autoFocus
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.NumberOfRoomsInCareHome}
+                            helperText={!!methods.formState.errors.NumberOfRoomsInCareHome && 'Enter the required field'}
                           />
                         )}
                       />
@@ -801,6 +879,7 @@ function Register() {
                       <Controller
                         control={control}
                         name="numberOfZonesInCareHome"
+                        rules={{ required: true }}
                         render={({ field }) => (
                           <TextField
                             margin="dense"
@@ -812,6 +891,8 @@ function Register() {
                             {...field}
                             fullWidth
                             variant={"outlined"}
+                            error={!!methods.formState.errors.numberOfZonesInCareHome}
+                            helperText={!!methods.formState.errors.numberOfZonesInCareHome && 'Enter the required field'}
                           />
                         )}
                       />
@@ -824,6 +905,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="NumberOfCommunityRoomsInCareHome"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
@@ -835,6 +917,8 @@ function Register() {
                           {...field}
                           fullWidth
                           variant={"outlined"}
+                          error={!!methods.formState.errors.NumberOfCommunityRoomsInCareHome}
+                            helperText={!!methods.formState.errors.NumberOfCommunityRoomsInCareHome && 'Enter the required field'}
                         />
                       )}
                     />
@@ -846,6 +930,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="careHomeNumberOfEnSuitesInCareHome"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <TextField
                           margin="dense"
@@ -857,6 +942,8 @@ function Register() {
                           {...field}
                           fullWidth
                           variant={"outlined"}
+                          error={!!methods.formState.errors.careHomeNumberOfEnSuitesInCareHome}
+                            helperText={!!methods.formState.errors.careHomeNumberOfEnSuitesInCareHome && 'Enter the required field'}
                         />
                       )}
                     />
@@ -951,6 +1038,7 @@ function Register() {
                   <Controller
                     control={control}
                     name="userEmailAddress"
+                    rules={{ required: true }}
                     render={({ field }) => (
                       <TextField
                         margin="dense"
@@ -963,6 +1051,8 @@ function Register() {
                         autoFocus
                         fullWidth
                         variant={"outlined"}
+                        error={!!methods.formState.errors.userEmailAddress}
+                            helperText={!!methods.formState.errors.userEmailAddress && 'Enter the required field'}
                         {...field}
                       />
                     )}
@@ -978,6 +1068,7 @@ function Register() {
                     <Controller
                       control={control}
                       name="password"
+                      rules={{ required: true }}
                       render={({ field }) => (
                         <OutlinedInput
                           id="outlined-adornment-password"
@@ -1002,6 +1093,7 @@ function Register() {
                           }
                           label="Password"
                           fullWidth
+                          error={!!methods.formState.errors.password}
                         />
                       )}
                     />
@@ -1115,28 +1207,7 @@ function Register() {
     }
   }
 
-  const methods = useForm({
-    defaultValues: {
-      careGroupName: "",
-      careHomename: "",
-      careGroupAddress: "",
-      careHomeAddress: "",
-      careGroupCity: "",
-      careGroupCountry: "",
-      careGroupContactNo: "",
-      careGroupEmail: "",
-      careHomeCity: "",
-      careHomeCountry: "",
-      careHomeContactNo: "",
-      careHomeEmail: "",
-      numberOfZonesInCareHome: "",
-      NumberOfCommunityRoomsInCareHome: "",
-      NumberOfRoomsInCareHome: "",
-      careHomeNumberOfEnSuitesInCareHome: "",
-      userEmailAddress: "",
-      password: "",
-    },
-  });
+
 
   return (
     <div className="">
@@ -1203,20 +1274,20 @@ function Register() {
                               color: "#10CFC9", // circle color (COMPLETED)
                             },
                             "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
-                              {
-                                color: "grey.500", // Just text label (COMPLETED)
-                              },
+                            {
+                              color: "grey.500", // Just text label (COMPLETED)
+                            },
                             "& .MuiStepLabel-root .Mui-active": {
                               color: "#10CFC9", // circle color (ACTIVE)
                             },
                             "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                              {
-                                color: "common.white", // Just text label (ACTIVE)
-                              },
+                            {
+                              color: "common.white", // Just text label (ACTIVE)
+                            },
                             "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
-                              {
-                                fill: "white", // circle's number (ACTIVE)
-                              },
+                            {
+                              fill: "white", // circle's number (ACTIVE)
+                            },
                           }}
                         >
                           <StepLabel {...labelProps}>{step}</StepLabel>
