@@ -29,11 +29,8 @@ export const logInWithEmailAndPassword = async (
   )=> {
    console.log("- - - - -  --- - - -",registrationPayload)
     try {
-
         const response = await 
-  
         axios.post(Apiurl+'register', registrationPayload)
-    
         const json = response;
         console.log(json)
         return json;
@@ -42,3 +39,17 @@ export const logInWithEmailAndPassword = async (
       console.error('Error', error);
     }
   };
+
+  export const registerUser2 =async (registrationPayload)=> {
+    try {
+      const response = await axios.post(Apiurl+'register', registrationPayload);
+      // Handle the response data
+      console.log("from registration fucn sucess", response.data);
+      return response.data
+    } catch (error) {
+      // Handle any errors that occurred during the registration API call
+      console.error("from error registartion fun", error);
+      return error
+    }
+
+  }

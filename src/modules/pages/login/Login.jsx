@@ -113,41 +113,42 @@ function Login() {
     event.preventDefault();
 
     const data = new FormData(event.currentTarget);
+    console.log("login form daqta", data);
 
     let userPayload = {
       email: data.get("email"),
       password: data.get("password"),
     };
 
-  
 
-    if (text ==='' || password.length === 0) {
+
+    if (text === '' || password.length === 0) {
 
       console.log("here in error11");
       openAlert1();
     }
-     else {
-      
-    await logInWithEmailAndPassword(userPayload).then((data) => {
- 
-  
-      console.log("here in away");
-      if (data === undefined ) {
+    else {
 
-      
-        openAlert();
-      } 
-      else {
-        console.log(JSON.stringify(data, null, 2))
-        localStorage.setItem('refreshToken',data.data.refresh_token);
-        navigate("/dashboard");
-     
-        
-      }
-    
- 
-  });
-    } 
+      await logInWithEmailAndPassword(userPayload).then((data) => {
+
+
+        console.log("here in away");
+        if (data === undefined) {
+
+
+          openAlert();
+        }
+        else {
+          console.log(JSON.stringify(data, null, 2))
+          localStorage.setItem('refreshToken', data.data.refresh_token);
+          navigate("/dashboard");
+
+
+        }
+
+
+      });
+    }
 
 
   };
@@ -161,10 +162,10 @@ function Login() {
     if (email === '' || undefined) {
       setEmailError('Enter something)')
     }
-      
+
     if (validator.isEmail(email)) {
       setEmailError('Valid Email :)')
-    } 
+    }
     else {
       setEmailError('Enter valid Email!')
     }
@@ -175,7 +176,7 @@ function Login() {
     var password = e.target.value
 
     setPassword(password)
-  
+
   }
 
   return (
@@ -211,7 +212,7 @@ function Login() {
 
                 <Container component="main" maxWidth="xs">
                   <Box
-                  className='formParentContainer'
+                    className='formParentContainer'
                     sx={{
                       boxShadow: 1,
                       width: 374,
@@ -250,8 +251,8 @@ function Login() {
                           onChange={(text) => validateEmail(text)}
                         />
                       </Container>
-                  
-                    
+
+
                       <Container component="main">
                         <FormControl
                           variant="outlined"
@@ -305,15 +306,15 @@ function Login() {
                             uppercase 1 lowercase & 1 numeric character
                           </p>
                         </div>
-                            <span style={{
-                        fontWeight: 'bold',
-                        color: 'red',
-                        fontSize: 14,
-                        fontFamily: 'muli',
-                        marginTop: 10
-                       
-                      }}>
-                        {emailError}
+                        <span style={{
+                          fontWeight: 'bold',
+                          color: 'red',
+                          fontSize: 14,
+                          fontFamily: 'muli',
+                          marginTop: 10
+
+                        }}>
+                          {emailError}
                         </span>
                         <div className="checkboxCont">
                           <Checkbox
@@ -336,9 +337,9 @@ function Login() {
                             fontWeight: 700,
                             fontSize: 14,
                             color: "#1D192B",
-                            lineHeight:'20px'
+                            lineHeight: '20px'
                           }}
-                          onClick={() => {}}
+                          onClick={() => { }}
                         >
                           <span className="loginBtnLabel" >LogIn</span>
                         </Button>
@@ -390,9 +391,9 @@ function Login() {
                                   borderColor: "#10CFC9",
                                 },
                                 "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                  {
-                                    borderColor: "#10CFC9",
-                                  },
+                                {
+                                  borderColor: "#10CFC9",
+                                },
                                 "&:hover .MuiOutlinedInput-notchedOutline": {
                                   borderColor: "#10CFC9",
                                 },
@@ -438,7 +439,7 @@ function Login() {
           </Grid>
         </Grid>
       </Box>
-    
+
 
       <Dialog
         open={open}
@@ -462,7 +463,7 @@ function Login() {
 
 
 
-      
+
       <Dialog
         open={open1}
         onClose={handleClose1}

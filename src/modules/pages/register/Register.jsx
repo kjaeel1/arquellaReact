@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { styled } from "@mui/material/styles";
 import { Box, StepLabel } from "@mui/material";
@@ -43,7 +43,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 
 import logo from "../../../static/assets/images/arquellaLogoPng.png";
-import { registerUser } from "../../services/auth";
+import { registerUser, registerUser2 } from "../../services/auth";
 import { CleaningServices } from "@mui/icons-material";
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -61,6 +61,9 @@ function Register() {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
 
   const methods = useForm({
     defaultValues: {
@@ -85,7 +88,7 @@ function Register() {
     },
   });
 
-  console.log(methods.formState.errors)
+  // console.log(methods.formState.errors)
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
@@ -107,25 +110,121 @@ function Register() {
     return skippedSteps.includes(step);
   };
 
-  let registrationPayload = {};
+  // data inititalisation for request payload according to backend
+  const requestPayloadData = {
+    care_group_name: "mahi cg",
+    care_group_email: "mahi@gmail.com",
+    care_group_contact_no: "25141747",
+    care_home_name: "mahi ch",
+    care_home_email: "mahich@gmail.com",
+    care_home_contact_no: "251488536",
+    user_email_address: "test@gmail.com",
+    password: "test@123",
+    care_group_address: "shanti nagar bsl",
+    care_home_address: "shanti nagar bsl",
+    care_group_city: "bhusawal",
+    care_group_country: "India",
+    care_home_city: "bhusawal",
+    care_home_country: "India",
+    number_of_zones_in_care_home: "10",
+    number_of_community_rooms_in_care_home: "10",
+    number_of_rooms_in_care_home: "10",
+    number_of_en_suites_in_care_home: "10",
+    no_of_care_homes: "10"
+
+  }
+
+
+
   const handleNext = async (data) => {
-    console.log(data)
-    registrationPayload = data;
+    
+    const updatedReqPyloadData = {
+      ...requestPayloadData,
+      care_group_name: data.careGroupName,
+      care_group_email: data.careGroupEmail,
+      care_group_contact_no: data.careGroupContactNo,
+      care_home_name: data.careHomename,
+      care_home_email: data.careHomeEmail,
+      care_home_contact_no: data.careHomeContactNo,
+      user_email_address: data.userEmailAddress,
+      password: data.password,
+      care_group_address: data.careGroupAddress,
+      care_home_address: data.careHomeAddress,
+      care_group_city: data.careGroupCity,
+      care_group_country: data.careGroupCountry,
+      care_home_city: data.careHomeCity,
+      care_home_country: data.careHomeCountry,
+      number_of_zones_in_care_home: data.numberOfZonesInCareHome,
+      number_of_community_rooms_in_care_home: data.NumberOfCommunityRoomsInCareHome,
+      number_of_rooms_in_care_home: data.NumberOfRoomsInCareHome,
+      number_of_en_suites_in_care_home: data.careHomeNumberOfEnSuitesInCareHome,
+      no_of_care_homes: data.noOfHomes
+    };
+
+    console.log("üpdated req payload", updatedReqPyloadData);
     console.log("step ..", activeStep);
 
-    if (activeStep == 2) {
-      await registerUser(registrationPayload).then((data) => {
-        // console.log("LOGIN", JSON.stringify( data.data.refresh_token, null, 2));
-        if (data === undefined) {
-          console.log("here in error");
-          openAlert();
-        } else {
-          // localStorage.setItem('refreshToken',data.data.refresh_token);
-          // navigate("/dashboard");
-          alert("hhhhhhhh");
-        }
-      });
+    // if (updatedReqPyloadData.password!="") {
+    //   await axios.post('http://localhost:3007/auth/register', updatedReqPyloadData)
+    //   .then(res => {
+    //     localStorage.setItem('refreshToken', res.data.refresh_token);
+    //     setSuccessMessage(res);
+    //     navigate("/dashboard");
+    //     alert(successMessage);
+    //   console.log("condii runn " ,res.message );
+    //     // redirect to home page or dashboard
+    //   })
+    //   .catch(error => {
+    //     setError(error.response.data.message);
+    //     setErrorMessage(error);
+    //     alert(errorMessage)
+    //   console.log("condii runn " ,res.message );
+
+    //   });
+
+    // }
+
+    if (activeStep == steps.length - 1) {
+      await axios.post('http://localhost:3007/auth/register', updatedReqPyloadData)
+        .then(res => {
+          localStorage.setItem('refreshToken', res.data.refresh_token);
+          setSuccessMessage(res);
+          navigate("/dashboard");
+          alert(successMessage);
+          console.log("condii runn *-*-", res);
+          // redirect to home page or dashboard
+        })
+        .catch(error => {
+          setError(error.response.data.message);
+          setErrorMessage(error);
+          alert(errorMessage)
+          console.log("condii runn *//*-", res.message);
+
+        });
+
+    } else {
+      setActiveStep(activeStep + 1);
+      setSkippedSteps(
+        skippedSteps.filter((skipItem) => skipItem !== activeStep)
+      );
     }
+
+    // if (activeStep == 2) {
+    //   registerUser2(updatedReqPyloadData)
+    //   .then(res =>console.log("regis .then", res))
+    //   .catch(err=>console.log("err in .catch", err))
+    //   // await registerUser(updatedReqPyloadData).then((data) => {
+    //   //   // console.log("LOGIN", JSON.stringify( data.data.refresh_token, null, 2));
+    //   //   if (data === undefined) {
+    //   //     console.log("here in error");
+    //   //     openAlert();
+    //   //   } else {
+    //   //     // localStorage.setItem('refreshToken',data.data.refresh_token);
+    //   //     // navigate("/dashboard");
+    //   //     alert("hhhhhhhh");
+    //   //   }
+    //   // });
+    // }
 
     if (activeStep == steps.length - 1) {
       // axios.post('http://localhost:3007/auth/register', registrationPayload)
@@ -162,6 +261,7 @@ function Register() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("handle submit called");
     const data = new FormData(event.currentTarget);
     console.log("submit fun", {
       email: data.get("email"),
@@ -378,7 +478,7 @@ function Register() {
                             fullWidth
                             variant={"outlined"}
                             error={!!methods.formState.errors.careGroupCity}
-                          helperText={!!methods.formState.errors.careGroupCity && 'Enter the required field'}
+                            helperText={!!methods.formState.errors.careGroupCity && 'Enter the required field'}
                           />
                         )}
                       />
@@ -918,7 +1018,7 @@ function Register() {
                           fullWidth
                           variant={"outlined"}
                           error={!!methods.formState.errors.NumberOfCommunityRoomsInCareHome}
-                            helperText={!!methods.formState.errors.NumberOfCommunityRoomsInCareHome && 'Enter the required field'}
+                          helperText={!!methods.formState.errors.NumberOfCommunityRoomsInCareHome && 'Enter the required field'}
                         />
                       )}
                     />
@@ -943,7 +1043,7 @@ function Register() {
                           fullWidth
                           variant={"outlined"}
                           error={!!methods.formState.errors.careHomeNumberOfEnSuitesInCareHome}
-                            helperText={!!methods.formState.errors.careHomeNumberOfEnSuitesInCareHome && 'Enter the required field'}
+                          helperText={!!methods.formState.errors.careHomeNumberOfEnSuitesInCareHome && 'Enter the required field'}
                         />
                       )}
                     />
@@ -1052,7 +1152,7 @@ function Register() {
                         fullWidth
                         variant={"outlined"}
                         error={!!methods.formState.errors.userEmailAddress}
-                            helperText={!!methods.formState.errors.userEmailAddress && 'Enter the required field'}
+                        helperText={!!methods.formState.errors.userEmailAddress && 'Enter the required field'}
                         {...field}
                       />
                     )}
@@ -1155,7 +1255,7 @@ function Register() {
                   color="primary"
                   // onClick={handleNext}
                   type="submit"
-                  onClick={handleNext}
+                  // onClick={handleNext}
                 >
                   {activeStep === steps.length - 1 ? "Submit" : "Next"}
                 </Button>
