@@ -31,6 +31,7 @@ import {
   Controller,
   FormProvider,
   useFormContext,
+  useWatch 
 } from "react-hook-form";
 
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -42,10 +43,12 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import IconButton from "@mui/material/IconButton";
 
+import validator from 'validator'
+
 import logo from "../../../static/assets/images/arquellaLogoPng.png";
-import { registerUser, registerUser2 } from "../../services/auth";
-import { CleaningServices } from "@mui/icons-material";
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
+
 
 function Register() {
   const [age, setAge] = React.useState("");
@@ -63,6 +66,8 @@ function Register() {
   const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [emailError, setEmailError] = useState('')
+  const [text, setText] = useState("");
 
 
   const methods = useForm({
@@ -86,13 +91,25 @@ function Register() {
       userEmailAddress: "",
       password: "",
     },
+    mode:"all",
+    reValidateMode: 'onChange'
   });
 
-  // console.log(methods.formState.errors)
+  const validationSchema = Yup.object().shape({
+    email: Yup.string()
+        .required('Email is required')
+        .email('Email is invalid')
+});
+const formOptions = { resolver: yupResolver(validationSchema) };
+
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+  const handleMouseDownPassword1 = (event) => {
+    event.preventDefault();
+  };
+
 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
@@ -163,26 +180,8 @@ function Register() {
 
     console.log("üpdated req payload", updatedReqPyloadData);
     console.log("step ..", activeStep);
+    console.log("sssssssssssssssssssssssssss", methods.formState)
 
-    // if (updatedReqPyloadData.password!="") {
-    //   await axios.post('http://localhost:3007/auth/register', updatedReqPyloadData)
-    //   .then(res => {
-    //     localStorage.setItem('refreshToken', res.data.refresh_token);
-    //     setSuccessMessage(res);
-    //     navigate("/dashboard");
-    //     alert(successMessage);
-    //   console.log("condii runn " ,res.message );
-    //     // redirect to home page or dashboard
-    //   })
-    //   .catch(error => {
-    //     setError(error.response.data.message);
-    //     setErrorMessage(error);
-    //     alert(errorMessage)
-    //   console.log("condii runn " ,res.message );
-
-    //   });
-
-    // }
 
     if (activeStep == steps.length - 1) {
       await axios.post('http://localhost:3007/auth/register', updatedReqPyloadData)
@@ -190,15 +189,15 @@ function Register() {
           localStorage.setItem('refreshToken', res.data.refresh_token);
           setSuccessMessage(res);
           navigate("/dashboard");
-          alert(successMessage);
+          alert(res);
           console.log("condii runn *-*-", res);
           // redirect to home page or dashboard
         })
         .catch(error => {
-          setError(error.response.data.message);
+      
           setErrorMessage(error);
-          alert(errorMessage)
-          console.log("condii runn *//*-", res.message);
+          // alert(error)
+          console.log("condii runn *//*-",JSON.stringify(error, null,2));
 
         });
 
@@ -209,38 +208,10 @@ function Register() {
       );
     }
 
-    // if (activeStep == 2) {
-    //   registerUser2(updatedReqPyloadData)
-    //   .then(res =>console.log("regis .then", res))
-    //   .catch(err=>console.log("err in .catch", err))
-    //   // await registerUser(updatedReqPyloadData).then((data) => {
-    //   //   // console.log("LOGIN", JSON.stringify( data.data.refresh_token, null, 2));
-    //   //   if (data === undefined) {
-    //   //     console.log("here in error");
-    //   //     openAlert();
-    //   //   } else {
-    //   //     // localStorage.setItem('refreshToken',data.data.refresh_token);
-    //   //     // navigate("/dashboard");
-    //   //     alert("hhhhhhhh");
-    //   //   }
-    //   // });
-    // }
+  
 
     if (activeStep == steps.length - 1) {
-      // axios.post('http://localhost:3007/auth/register', registrationPayload)
-      // .then(res => {
-      //   localStorage.setItem('refreshToken', res.data.refresh_token);
-      //   // redirect to home page or dashboard
-      // })
-      // .catch(error => {
-      //   setError(error.response.data.message);
-      // });
-      // fetch("https://jsonplaceholder.typicode.com/comments")
-      //   .then((data) => data.json())
-      //   .then((res) => {
-      //     console.log(res);
-      //     setActiveStep(activeStep + 1);
-      //   });
+
     } else {
       if (data.careHomename == '') {
         console.log("condition run");
@@ -280,11 +251,28 @@ function Register() {
     setActiveStep(activeStep + 1);
   };
 
-  const handleChange1 = event => {
-    // setCareGroupName(event)
-    console.log(event.target.value)
 
-  };
+
+ 
+
+  const validateEmail = (e) => {
+    console.log(e)
+    var email = e.target.value
+
+    setText(email)
+
+    if (email === '' || undefined) {
+      setEmailError('Enter something)')
+    }
+
+    if (validator.isEmail(email)) {
+      setEmailError('Valid Email :)')
+    }
+    else {
+      setEmailError('Enter valid Email!')
+    }
+  }
+  
 
   const Step1a = () => {
     const { control } = useFormContext();
@@ -377,7 +365,7 @@ function Register() {
                           id="careGroupName"
                           label="Care Group Name"
                           name="careGroupName"
-                          autoFocus
+                          // autoFocus
                           // fullWidth
                           variant={"outlined"}
                           {...field}
@@ -403,6 +391,8 @@ function Register() {
                         <TextField
                           margin="dense"
                           required
+                          type="number"
+                          
                           size={"large"}
                           id="noOfHomes"
                           label="Number of Homes"
@@ -531,6 +521,7 @@ function Register() {
                             id="cno"
                             label="Contact No"
                             name="careGroupContactNo"
+                            type="number"
                             {...field}
                             // autoFocus
                             fullWidth
@@ -823,6 +814,7 @@ function Register() {
                             name="careHomeContactNo"
                             {...field}
                             // autoFocus
+                            type="number"
                             fullWidth
                             variant={"outlined"}
                             error={!!methods.formState.errors.careHomeContactNo}
@@ -965,6 +957,7 @@ function Register() {
                             id="NumberOfRoomsInCareHome"
                             label="Number Of Rooms"
                             name="NumberOfRoomsInCareHome"
+                            type="number"
                             {...field}
                             autoFocus
                             fullWidth
@@ -988,6 +981,7 @@ function Register() {
                             id="numberOfZonesInCareHome"
                             label="Number of Zones"
                             name="numberOfZonesInCareHome"
+                            type="number"
                             {...field}
                             fullWidth
                             variant={"outlined"}
@@ -1014,6 +1008,7 @@ function Register() {
                           id="NumberOfCommunityRoomsInCareHome"
                           label="Number of Community Rooms"
                           name="NumberOfCommunityRoomsInCareHome"
+                          type="number"
                           {...field}
                           fullWidth
                           variant={"outlined"}
@@ -1039,6 +1034,7 @@ function Register() {
                           id="careHomeNumberOfEnSuitesInCareHome"
                           label="Number of en Suites"
                           name="careHomeNumberOfEnSuitesInCareHome"
+                          type="number"
                           {...field}
                           fullWidth
                           variant={"outlined"}
@@ -1105,6 +1101,10 @@ function Register() {
 
   const Step3 = () => {
     const { control } = useFormContext();
+    const { register, errors, trigger, handleSubmit, clearErrors, onChange } = useForm({
+      mode: 'onBlur',
+      reValidateMode: 'onBlur'
+    });
     return (
       <div>
         <Container component="main" maxWidth="xs">
@@ -1130,7 +1130,7 @@ function Register() {
               <Box
                 component="form"
                 onSubmit={handleSubmit}
-                noValidate
+                
                 sx={{ mt: 5, mb: 5 }}
               >
                 {/* <!-------------------------------------------------------For Stepper 3 ---------------------------------------------------------------> */}
@@ -1138,9 +1138,11 @@ function Register() {
                   <Controller
                     control={control}
                     name="userEmailAddress"
+                
                     rules={{ required: true }}
                     render={({ field }) => (
                       <TextField
+                      onChange={(text) => validateEmail(text)}
                         margin="dense"
                         required
                         size={"large"}
@@ -1148,15 +1150,27 @@ function Register() {
                         label="Email Address"
                         name="userEmailAddress"
                         autoComplete="email"
-                        autoFocus
+                        // autoFocus
+                        
                         fullWidth
+                        type={"email"}
                         variant={"outlined"}
-                        error={!!methods.formState.errors.userEmailAddress}
-                        helperText={!!methods.formState.errors.userEmailAddress && 'Enter the required field'}
+                        error={emailError}
+                        helperText={emailError}
                         {...field}
                       />
                     )}
                   />
+                     <span style={{
+                          fontWeight: 'bold',
+                          color: 'red',
+                          fontSize: 14,
+                          fontFamily: 'muli',
+                          marginTop: 10
+
+                        }}>
+                          {emailError}
+                        </span>
                 </Container>
                 <br />
                 <Container component="main">
@@ -1212,26 +1226,40 @@ function Register() {
                     variant="outlined"
                     style={{ width: "100%", marginTop: 16 }}
                   >
-                    <InputLabel htmlFor="outlined-adornment-password">
+                    <InputLabel htmlFor="outlined-adornment-password1">
                       Password
                     </InputLabel>
-                    <OutlinedInput
-                      id="outlined-adornment-password"
-                      type={showPassword1 ? "text" : "password"}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <IconButton
-                            aria-label="toggle password visibility"
-                            onClick={handleClickShowPassword1}
-                            onMouseDown={handleMouseDownPassword}
-                            edge="end"
-                          >
-                            {showPassword1 ? <VisibilityOff /> : <Visibility />}
-                          </IconButton>
-                        </InputAdornment>
-                      }
-                      label="Password"
-                      fullWidth
+                    <Controller
+                      control={control}
+                      name="password1"
+                      rules={{ required: true }}
+                      render={({ field }) => (
+                        <OutlinedInput
+                          id="outlined-adornment-password1"
+                          name="password"
+                          {...field}
+                          type={showPassword1 ? "text" : "password"}
+                          endAdornment={
+                            <InputAdornment position="end">
+                              <IconButton
+                                aria-label="toggle password visibility"
+                                onClick={handleClickShowPassword1}
+                                onMouseDown={handleMouseDownPassword1}
+                                edge="end"
+                              >
+                                {showPassword1 ? (
+                                  <VisibilityOff />
+                                ) : (
+                                  <Visibility />
+                                )}
+                              </IconButton>
+                            </InputAdornment>
+                          }
+                          label="Password"
+                          fullWidth
+                          error={!!methods.formState.errors.password}
+                        />
+                      )}
                     />
                   </FormControl>
                 </Container>
@@ -1369,6 +1397,7 @@ function Register() {
                           {...stepProps}
                           key={index}
                           style={{ marginTop: 16 }}
+                          onClick={ ()=>  setActiveStep(index)}
                           sx={{
                             "& .MuiStepLabel-root .Mui-completed": {
                               color: "#10CFC9", // circle color (COMPLETED)
@@ -1389,6 +1418,7 @@ function Register() {
                               fill: "white", // circle's number (ACTIVE)
                             },
                           }}
+                          
                         >
                           <StepLabel {...labelProps}>{step}</StepLabel>
                         </Step>
