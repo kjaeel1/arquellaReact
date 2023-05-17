@@ -8,8 +8,6 @@ export const logInWithEmailAndPassword = async (
   )=> {
    
     try {
-  
-     
     
         const response = await 
         axios.post( Apiurl+'login', userPayload)
