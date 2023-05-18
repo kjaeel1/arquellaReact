@@ -333,7 +333,7 @@ const Register = props => {
                           name="city"
                           type="text"
                         
-                          autoFocus
+                        
                           fullWidth
                           variant={"outlined"}
                         
@@ -383,7 +383,6 @@ const Register = props => {
                           name="cno"
                           type="number"
                         
-                          autoFocus
                           fullWidth
                           variant={"outlined"}
                         
@@ -620,7 +619,7 @@ const Register = props => {
                           name="city"
                           type="text"
                         
-                          autoFocus
+                        
                           fullWidth
                           variant={"outlined"}
                         
@@ -670,7 +669,7 @@ const Register = props => {
                           name="cno"
                           type="number"
                         
-                          autoFocus
+                        
                           fullWidth
                           variant={"outlined"}
                         
