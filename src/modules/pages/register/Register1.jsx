@@ -66,7 +66,7 @@ const Register = props => {
   const [activeStep, setActiveStep] = useState(0);
   const [skippedSteps, setSkippedSteps] = useState([]);
   const steps = getSteps();
-  const [showPassword, setShowPassword] = React.useState(true);
+  
   // const [showPassword1, setShowPassword1] = React.useState(false);
   const [careGroupName, setCareGroupName] = useState();
 
@@ -130,20 +130,9 @@ const Register = props => {
   };
 
 
-
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
   const handleMouseDownPassword1 = (event) => {
     event.preventDefault();
   };
-
-
-  const handleClickShowPassword = () => {
-
-    console.log('here', showPassword)
-    setShowPassword((prev)=>!prev );
-  }
 
 
   const handleChange = (event) => {
@@ -954,10 +943,6 @@ const Register = props => {
   }
 
 
-
-
-
-
   const Step3 = () => {
     const formSchema = Yup.object().shape({
       password: Yup.string()
@@ -972,6 +957,19 @@ const Register = props => {
     const formOptions = { resolver: yupResolver(formSchema) }
     const { register, handleSubmit, reset, formState } = useForm(formOptions)
     const { errors } = formState
+    
+    //showPassword State
+    const [showPassword, setShowPassword] = React.useState(true);
+    const handleMouseDownPassword = (event) => {
+      event.preventDefault();
+    };
+  
+    const handleClickShowPassword = () => {
+  
+      console.log('here', showPassword)
+      setShowPassword((prev)=>!prev );
+    }
+
     function onSubmit(data) {
       console.log(JSON.stringify(data, null, 4))
       setPassword(data.password)
@@ -1019,16 +1017,11 @@ const Register = props => {
                 variant={"outlined"}
                 error={emailError}
                 helperText={emailError}
-              // className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                // className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               />
             </Container>
 
-
-      
-            <FormControl
-                    variant="outlined"
-                    style={{ width: "100%", marginTop: 16 }}
-                  >
+            <Container component="main" maxWidth="lg">
               <TextField
             
                {...register('password')}
@@ -1036,9 +1029,6 @@ const Register = props => {
            
                 label="Password"
                 name="password"
-             
-            
-
                 // type={showPassword === true ?  console.log('herher') :    console.log('sssss')}
                 type={showPassword ? "text" : "password"}
                 fullWidth
@@ -1066,7 +1056,7 @@ const Register = props => {
               // className={`form-control ${errors.email ? 'is-invalid' : ''}`}
               />
             
-            </FormControl>
+            </Container>
 
             <Container component="main" maxWidth="lg">
               <TextField
@@ -1090,8 +1080,6 @@ const Register = props => {
             </Container>
 
 
-
-          
           </div>
           {/* <div className="form-group">
             <label>Confirm Password</label>
@@ -1130,8 +1118,6 @@ const Register = props => {
         return "unknown step";
     }
   }
-
-
 
   return (
     <div className="">
