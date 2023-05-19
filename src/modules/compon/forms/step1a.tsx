@@ -137,7 +137,7 @@ const Step1a = ({change,button, handleChange,handleRadio, getData} ) => {
               sx={{ mt: 5, mb: 5 }}
             >
 
-              <FormControl>
+              {/* <FormControl>
                   <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
@@ -171,7 +171,7 @@ const Step1a = ({change,button, handleChange,handleRadio, getData} ) => {
                       label="Care Home"
                     />
                   </RadioGroup>
-                </FormControl>
+                </FormControl> */}
 
               <Container component="main" maxWidth="lg">
         

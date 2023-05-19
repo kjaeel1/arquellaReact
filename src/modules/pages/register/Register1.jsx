@@ -12,6 +12,14 @@ import Step1 from "../../compon/forms/step1";
 import Step2 from "../../compon/forms/step2";
 import Step3 from "../../compon/forms/step3";
 
+
+import FormControl from "@mui/material/FormControl";
+import Button from "@mui/material/Button";
+
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+
 const Register = (props) => {
   const [selectedValue, setSelectedValue] = React.useState("a");
   const [activeStep, setActiveStep] = useState(0);
@@ -90,6 +98,7 @@ const Register = (props) => {
   };
 
   function getStep1(data) {
+
     setActiveStep(activeStep + 1);
 
     setCareHomeName(data.careGroupName);
@@ -348,7 +357,42 @@ const Register = (props) => {
                       Thank You
                     </Typography>
                   ) : (
-                    <>{getStepContent(activeStep)}</>
+                    <>
+                    <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                  >
+                    <FormControlLabel
+                      value="CareGroup"
+                      control={
+                        <Radio
+                          checked={selectedValue === "a"}
+                          onChange={handleChange}
+                          value="a"
+                          name="radio-buttons"
+                          slotProps={{ input: { "aria-label": "A" } }}
+                        />
+                      }
+                      label="Care Group"
+                    />
+                    <FormControlLabel
+                      value="CareHome"
+                      control={
+                        <Radio
+                          checked={selectedValue === "b"}
+                          onChange={handleChange}
+                          value="b"
+                          name="radio-buttons"
+                          slotProps={{ input: { "aria-label": "B" } }}
+                        />
+                      }
+                      label="Care Home"
+                    />
+                  </RadioGroup>
+                </FormControl>
+                      <>{getStepContent(activeStep)}</></>
                   )}
                 </Container>
               </div>
