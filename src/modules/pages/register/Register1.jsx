@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
+
 import { Box, StepLabel } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
@@ -11,14 +11,12 @@ import logo from "../../../static/assets/images/arquellaLogoPng.png";
 import Step1 from "../../compon/forms/step1";
 import Step2 from "../../compon/forms/step2";
 import Step3 from "../../compon/forms/step3";
-
-
+import { useNavigate } from "react-router-dom";
 import FormControl from "@mui/material/FormControl";
-import Button from "@mui/material/Button";
-
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { registerUser } from "../../services/auth";
 
 const Register = (props) => {
   const [selectedValue, setSelectedValue] = React.useState("a");
@@ -33,7 +31,7 @@ const Register = (props) => {
   const [country, setCountry] = useState("");
   const [cno, setCno] = useState("");
   const [groupEmail, setGroupEmail] = useState("");
-
+  const navigate = useNavigate();
   const [careHomeName, setCareHomeName] = useState("");
   const [homeAddress, setHomeAddress] = useState("");
   const [homeCity, setHomeCity] = useState("");
@@ -51,6 +49,11 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
 
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const [noOfRoomHome, SetNoOfRoomHome] = useState("");
+  const [noOfZonesHome, SetNoOfZonesHome] = useState("");
+  const [noOfCommRoomsHome, SetNoOfCommRoomsHome] = useState("");
+  const [noOfEnSuiteHOme, SetNoOfEnSuiteHome] = useState("");
 
   // const [careGroupName, setCareGroupName] = useState("");
 
@@ -77,16 +80,17 @@ const Register = (props) => {
     setActiveStep(activeStep + 1);
   };
 
- 
   const handleChange = (event) => {
     setSelectedValue(event.target.value);
   };
 
+  //form1a data collection
   const getStep1a = (data) => {
     setActiveStep(activeStep + 1);
+
     setCareGroupName(data.careGroupName);
     setNoOfHomes(data.noOfHomes);
-    setHomeAddress(data.address);
+
     setAddress(data.address);
     setCity(data.city);
     setCountry(data.country);
@@ -97,13 +101,12 @@ const Register = (props) => {
     console.log(JSON.stringify(data, null, 2));
   };
 
+  //form1 data collection
   function getStep1(data) {
-
     setActiveStep(activeStep + 1);
 
-    setCareHomeName(data.careGroupName);
+    setCareHomeName(data.careHomeName);
 
-    setAddress(data.address);
     setHomeCity(data.city);
     setHomeCountry(data.country);
     setHomeCno(data.cno);
@@ -112,17 +115,25 @@ const Register = (props) => {
     console.log(JSON.stringify(data, null, 2));
   }
 
+  //form2 data collection
   function getStep2(data) {
     setActiveStep(activeStep + 1);
 
-    SetNoOfRoom(data.NumberOfRoomsInCareHome);
-    SetNoOfZones(data.numberOfZonesInCareHome);
-    SetNoOfCommRooms(data.NumberOfCommunityRoomsInCareHome);
-    SetNoOfEnSuite(data.careHomeNumberOfEnSuitesInCareHome);
+    if (selectedValue === "a") {
+      SetNoOfRoom(data.NumberOfRoomsInCareHome);
+      SetNoOfZones(data.numberOfZonesInCareHome);
+      SetNoOfCommRooms(data.NumberOfCommunityRoomsInCareHome);
+      SetNoOfEnSuite(data.careHomeNumberOfEnSuitesInCareHome);
+    } else {
+      SetNoOfRoomHome(data.NumberOfRoomsInCareHome);
+      SetNoOfZonesHome(data.numberOfZonesInCareHome);
+      SetNoOfCommRoomsHome(data.NumberOfCommunityRoomsInCareHome);
+      SetNoOfEnSuiteHome(data.careHomeNumberOfEnSuitesInCareHome);
+    }
 
     console.log(JSON.stringify(data, null, 2));
   }
-
+  //form3 data collection
   function getStep3(data) {
     console.log("--0-", data);
 
@@ -133,28 +144,9 @@ const Register = (props) => {
     handleNext(data);
   }
 
+  //API call
   const handleNext = async (data) => {
     const updatedReqPyloadData = {
-      // care_group_name: careGroupName,
-      // care_group_email: groupEmail,
-      // care_group_contact_no: cno,
-      // care_home_name: careHomeName,
-      // care_home_email: homeEmail,
-      // care_home_contact_no: homeCno,
-      // user_email_address: loginEmail,
-      // password: password,
-      // care_group_address: address,
-      // care_home_address:homeAddress,
-      // care_group_city: city,
-      // care_group_country:country,
-      // care_home_city: homeCity,
-      // care_home_country:homeCountry,
-      // number_of_zones_in_care_home: noOfZones,
-      // number_of_community_rooms_in_care_home: noOfCommRooms,
-      // number_of_rooms_in_care_home: noOfRoom,
-      // number_of_en_suites_in_care_home: noOfEnSuite,
-      // no_of_care_homes: noOfHomes
-
       care_group_name: careGroupName,
       care_group_email: groupEmail,
       care_group_contact_no: cno,
@@ -167,34 +159,32 @@ const Register = (props) => {
       care_home_address: homeAddress,
       care_group_city: city,
       care_group_country: country,
+
       total_number_of_rooms_in_care_group: noOfRoom,
       total_number_of_zones_in_care_group: noOfZones,
       total_number_of_community_rooms_in_care_group: noOfCommRooms,
       total_number_of_en_suites_in_care_group: noOfEnSuite,
+
       care_home_city: homeCity,
       care_home_country: homeCountry,
-      number_of_zones_in_care_home: "0",
-      number_of_community_rooms_in_care_home: "0",
-      number_of_rooms_in_care_home: "0",
-      number_of_en_suites_in_care_home: "0",
+
+      number_of_zones_in_care_home: noOfZonesHome,
+      number_of_community_rooms_in_care_home: noOfCommRoomsHome,
+      number_of_rooms_in_care_home: noOfRoomHome,
+      number_of_en_suites_in_care_home: noOfEnSuiteHOme,
       no_of_care_homes: noOfHomes,
     };
 
-    console.log("üpdated req payload", updatedReqPyloadData);
-    console.log("step ..", activeStep);
-
     if (activeStep == steps.length - 1) {
-      await axios
-        .post("http://localhost:3007/auth/register", updatedReqPyloadData)
-        .then((res) => {
-          localStorage.setItem("refreshToken", res.data.refresh_token);
-          // setSuccessMessage(res);
+      await registerUser(updatedReqPyloadData)
+        .then((data) => {
+          console.log(" *//*-", JSON.stringify(data, null, 2));
+          // localStorage.setItem("refreshToken", res.data.refresh_token);
+
           navigate("/dashboard");
           // redirect to home page or dashboard
         })
         .catch((error) => {
-          // setErrorMessage(error);
-          // alert(error)
           console.log("condii runn *//*-", JSON.stringify(error, null, 2));
         });
     } else {
@@ -203,29 +193,9 @@ const Register = (props) => {
         skippedSteps.filter((skipItem) => skipItem !== activeStep)
       );
     }
-
-    // if (activeStep == steps.length - 1) {
-
-    // } else {
-    //   if (data.careHomename == '') {
-    //     console.log("condition run");
-    //     // setActiveStep(activeStep - 1);
-    //     setSelectedValue('b');
-
-    //   }
-
-    //   if (data.careHomename !== '') {
-
-    //     setActiveStep(activeStep + 1);
-    //     setSkippedSteps(
-    //       skippedSteps.filter((skipItem) => skipItem !== activeStep)
-    //     );
-    //   }
-    // }
   };
 
-  
-
+  //switch forms on clicking next
   function getStepContent(step) {
     switch (step) {
       case 0:
@@ -262,8 +232,7 @@ const Register = (props) => {
             getData={getStep3}
           />
         );
-      // case 3:
-      //   return <PaymentForm />;
+
       default:
         return "unknown step";
     }
@@ -346,6 +315,7 @@ const Register = (props) => {
                     })}
                   </Stepper>
 
+                  {/* Form dynamic text */}
                   <p className="dynamicText">
                     {activeStep === 0 ? " Basic Information" : ""}
                     {activeStep === 1 ? " Care Home Details" : ""}
@@ -357,42 +327,74 @@ const Register = (props) => {
                       Thank You
                     </Typography>
                   ) : (
-                    <>
-                    <FormControl>
-                  <RadioGroup
-                    row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                  >
-                    <FormControlLabel
-                      value="CareGroup"
-                      control={
-                        <Radio
-                          checked={selectedValue === "a"}
-                          onChange={handleChange}
-                          value="a"
-                          name="radio-buttons"
-                          slotProps={{ input: { "aria-label": "A" } }}
-                        />
-                      }
-                      label="Care Group"
-                    />
-                    <FormControlLabel
-                      value="CareHome"
-                      control={
-                        <Radio
-                          checked={selectedValue === "b"}
-                          onChange={handleChange}
-                          value="b"
-                          name="radio-buttons"
-                          slotProps={{ input: { "aria-label": "B" } }}
-                        />
-                      }
-                      label="Care Home"
-                    />
-                  </RadioGroup>
-                </FormControl>
-                      <>{getStepContent(activeStep)}</></>
+                    <Box
+                      sx={{
+                        boxShadow: 1,
+                        width: 396,
+                        // height: 707,
+                        // px: 2,
+                        // py: 2,
+                        marginTop: 2,
+                        display: "flex",
+                        flexDirection: "column",
+                        // alignItems: "center",
+                        borderRadius: 5,
+                        border: "1px solid #888C8C",
+                        mt: 5,
+                        // alignContent: "center",
+                        // alignSelf: "center",
+                        // marginLeft: -3,
+                      }}
+                    >
+                      {/* Radio button component */}
+                      {activeStep === 0 ? (
+                        <FormControl
+                          style={{
+                            alignContent: "center",
+                            alignSelf: "center",
+                          }}
+                          sx={{ mt: 4 }}
+                        >
+                          <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                          >
+                            <FormControlLabel
+                              value="CareGroup"
+                              control={
+                                <Radio
+                                  checked={selectedValue === "a"}
+                                  onChange={handleChange}
+                                  value="a"
+                                  name="radio-buttons"
+                                  slotProps={{ input: { "aria-label": "A" } }}
+                                />
+                              }
+                              label="Care Group"
+                            />
+                            <FormControlLabel
+                              value="CareHome"
+                              control={
+                                <Radio
+                                  checked={selectedValue === "b"}
+                                  onChange={handleChange}
+                                  value="b"
+                                  name="radio-buttons"
+                                  slotProps={{ input: { "aria-label": "B" } }}
+                                />
+                              }
+                              label="Care Home"
+                            />
+                          </RadioGroup>
+                        </FormControl>
+                      ) : (
+                        <div />
+                      )}
+
+                      {/* Switch form on clicking on next  */}
+                      {getStepContent(activeStep)}
+                    </Box>
                   )}
                 </Container>
               </div>

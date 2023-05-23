@@ -1,359 +1,210 @@
 import React, { useState, useEffect, useRef } from "react";
-import clsx from "clsx";
-// import styles from "./Register.css";
 
-
-
-import axios from "axios";
-import { styled } from "@mui/material/styles";
 import { Box, StepLabel } from "@mui/material";
 
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 
-
 import Link from "@mui/material/Link";
 
-
-import FormControl from "@mui/material/FormControl";
 import Button from "@mui/material/Button";
-
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-
 
 import Container from "@mui/material/Container";
 
-import {
-    useForm,
-    Controller,
-    FormProvider,
-    useFormContext,
-    useWatch
-  } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 
-import { yupResolver } from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
+const Step1 = ({ handleChange, button, handleRadio, getData }) => {
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+  const formSchema = Yup.object().shape({
+    careHomeName: Yup.string().required("This Field is mandatory"),
+    address: Yup.string().required("This Field is mandatory"),
 
+    city: Yup.string().required("This Field is mandatory"),
+    country: Yup.string().required("This Field is mandatory"),
 
+    cno: Yup.string()
+      .matches(phoneRegExp, "Phone number is not valid")
+      .min(10, "must be at 10 char long"),
+    email: Yup.string().email(),
+  });
+  const formOptions = { resolver: yupResolver(formSchema) };
+  const { register, handleSubmit, reset, formState } = useForm(formOptions);
+  const { errors } = formState;
+  function onSubmit(data) {
+    console.log(JSON.stringify(data, null, 4));
+    let formData = data;
 
+    getData(formData);
+    return false;
+  }
 
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-group">
+        <Container component="main" maxWidth="xs">
+          <Box>
+            <Container component="main" maxWidth="lg">
+              <TextField
+                {...register("careHomeName")}
+                margin="dense"
+                required
+                size={"large"}
+                id="careHomeName"
+                label="Care Home Name"
+                name="careHomeName"
+                type="text"
+                fullWidth
+                variant={"outlined"}
+              />
+            </Container>
 
+            <Container component="main" maxWidth="lg">
+              <TextField
+                {...register("address")}
+                margin="dense"
+                required
+                size={"large"}
+                id="address"
+                label="Address"
+                name="address"
+                type="text"
+                fullWidth
+                variant={"outlined"}
+              />
+            </Container>
 
+            <Container component="main" maxWidth="lg">
+              <Grid
+                container
+                spacing={2}
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+                // style={{ minHeight: '100vh' }}
+              >
+                <Grid item md={6}>
+                  <TextField
+                    {...register("city")}
+                    margin="dense"
+                    required
+                    size={"large"}
+                    id="city"
+                    label="City"
+                    name="city"
+                    type="text"
+                    fullWidth
+                    variant={"outlined"}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <TextField
+                    {...register("country")}
+                    margin="dense"
+                    required
+                    size={"large"}
+                    id="country"
+                    label="Country"
+                    name="country"
+                    type="text"
+                    fullWidth
+                    variant={"outlined"}
+                  />
+                </Grid>
+              </Grid>
+            </Container>
 
-const Step1 = ({handleChange, button,handleRadio}) => {
-    const [age, setAge] = React.useState("");
-
-    const [selectedValue, setSelectedValue] = React.useState("a");
-  
-    const [skippedSteps, setSkippedSteps] = useState([]);
+            <Container component="main" maxWidth="lg">
+              <Grid
+                container
+                spacing={2}
+                direction="row"
+                alignItems="center"
+                justifyContent="center"
+            
+              >
+                <Grid item md={6}>
+                  <TextField
+                    {...register("cno")}
+                    margin="dense"
+                    required
+                    size={"large"}
+                    id="cno"
+                    label="Contact No"
+                    name="cno"
+                    type="number"
+                    error={errors.cno?.message}
+                    helperText={errors.cno?.message}
+                    fullWidth
+                    variant={"outlined"}
+                  />
+                </Grid>
+                <Grid item md={6}>
+                  <TextField
+                    {...register("email")}
+                    margin="dense"
+                    required
+                    size={"large"}
+                    id="email"
+                    label="Email"
+                    name="email"
+                    type="text"
+                    fullWidth
+                    variant={"outlined"}
+                  />
+                </Grid>
+              </Grid>
+            </Container>
+          </Box>
+          <Container component="main" maxWidth="lg">
+            <Button
+              variant="contained"
+              sx={{
+                borderRadius: "40px",
+                width: "294px",
+                backgroundColor: "#10CFC9",
+                mt: 2,
+                mb: 2,
+              }}
+              color="primary"
     
-    
-    // const [showPassword1, setShowPassword1] = React.useState(false);
-    const [careGroupName, setCareGroupName] = useState();
-  
-  
-    const handleClickShowPassword1 = () => setShowPassword1((show) => !show);
-    const [successMessage, setSuccessMessage] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');
-    const [emailError, setEmailError] = useState('')
-    const [text, setText] = useState("");
-  
-    const [password, setPassword] = useState(false);
-  
-    const [password1, setPassword1] = useState("");
+              type="submit"
+            >
+              {button}
+            </Button>
+          </Container>
 
-  
- 
-
-    const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
-
-        const formSchema = Yup.object().shape({
-          careHomeName: Yup.string()
-            .required('This Field is mandatory'),
-          address: Yup.string()
-            .required('This Field is mandatory'),
-    
-    
-          city: Yup.string()
-            .required('This Field is mandatory'),
-          country: Yup.string()
-            .required('This Field is mandatory'),
-    
-            cno: Yup.string().matches(phoneRegExp, 'Phone number is not valid') .min(10, "must be at 10 char long"),
-            email: Yup.string().email(),
-    
-        })
-        const formOptions = { resolver: yupResolver(formSchema) }
-        const { register, handleSubmit, reset, formState } = useForm(formOptions)
-        const { errors } = formState
-        function onSubmit(data) {
-          console.log(JSON.stringify(data, null, 4))
-          
-          return false
-        }
-    
-    
-        return (
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <Container component="main" maxWidth="xs">
-                <Box
-                  sx={{
-                    boxShadow: 1,
-                    width: 396,
-                    // height: 707,
-                    // px: 2,
-                    // py: 2,
-                    marginTop: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    // alignItems: "center",
-                    borderRadius: 5,
-                    border: "1px solid #888C8C",
-                    alignContent: "center",
-                    alignSelf: "center",
-                    marginLeft: -3,
-                  }}
+          <Container component="main" maxWidth="lg">
+            <Grid
+              container
+              spacing={2}
+              direction="row"
+              alignItems="center"
+              justifyContent="center"
+              style={{ marginTop: 8, marginBottom: 30 }}
+            >
+              <Grid item xs={8}>
+                <p className="already">Already have an account?</p>
+              </Grid>
+              <Grid item xs={4}>
+                <Link
+                  href="/Login"
+                  className="login"
+                  style={{ textDecoration: "none", marginLeft: 25 }}
                 >
-    
-                  <Box
-    
-    
-                    sx={{ mt: 5, mb: 5 }}
-                  >
-                    {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
-    
-                    {/* <FormControl>
-                      <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                      >
-                        <FormControlLabel
-                          value="CareGroup"
-                          control={
-                            <Radio
-                              checked={handleRadio}
-                              onChange={handleChange}
-                              value="a"
-                              name="radio-buttons"
-                              slotProps={{ input: { "aria-label": "A" } }}
-                            />
-                          }
-                          label="Care Group"
-                        />
-                        <FormControlLabel
-                          value="CareHome"
-                          control={
-                            <Radio
-                                 checked={selectedValue === "a"}
-                              onChange={handleChange}
-                              value="b"
-                              name="radio-buttons"
-                              slotProps={{ input: { "aria-label": "B" } }}
-                            />
-                          }
-                          label="Care Home"
-                        />
-                      </RadioGroup>
-                    </FormControl> */}
-                    <Container component="main" maxWidth="lg">
-    
-    
-                      <TextField
-                        {...register('careHomeName')}
-                        margin="dense"
-                        required
-                        size={"large"}
-                        id="careHomeName"
-                        label="Care Home Name"
-                        name="careHomeName"
-                        type="text"
-    
-                        fullWidth
-                        variant={"outlined"}
-    
-    
-                      />
-    
-                    </Container>
-    
-                    <Container component="main" maxWidth="lg">
-    
-    
-                      <TextField
-                        {...register('address')}
-                        margin="dense"
-                        required
-                        size={"large"}
-                        id="address"
-                        label="Address"
-                        name="address"
-                        type="text"
-    
-                        fullWidth
-                        variant={"outlined"}
-    
-                      />
-    
-    
-                    </Container>
-    
-                    <Container component="main" maxWidth="lg">
-                      <Grid
-                        container
-                        spacing={2}
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="center"
-                      // style={{ minHeight: '100vh' }}
-                      >
-                        <Grid item md={6}>
-    
-                          <TextField
-                            {...register('city')}
-                            margin="dense"
-                            required
-                            size={"large"}
-                            id="city"
-                            label="City"
-                            name="city"
-                            type="text"
-    
-    
-                            fullWidth
-                            variant={"outlined"}
-    
-                          />
-    
-    
-                        </Grid>
-                        <Grid item md={6}>
-    
-                          <TextField
-                            {...register('country')}
-                            margin="dense"
-                            required
-                            size={"large"}
-                            id="country"
-                            label="Country"
-                            name="country"
-                            type="text"
-    
-                            fullWidth
-                            variant={"outlined"}
-    
-    
-                          />
-                        </Grid>
-                      </Grid>
-                    </Container>
-    
-                    <Container component="main" maxWidth="lg">
-                      <Grid
-                        container
-                        spacing={2}
-                        direction="row"
-                        alignItems="center"
-                        justifyContent="center"
-                      // style={{ minHeight: '100vh' }}
-                      >
-                        <Grid item md={6}>
-    
-                          <TextField
-                            {...register('cno')}
-                            margin="dense"
-                            required
-                            size={"large"}
-                            id="cno"
-                            label="Contact No"
-                            name="cno"
-                            type="number"
-                            error={errors.cno?.message}
-                            helperText={errors.cno?.message}
-                            fullWidth
-                            variant={"outlined"}
-    
-                          />
-    
-    
-                        </Grid>
-                        <Grid item md={6}>
-    
-                          <TextField
-                            {...register('email')}
-                            margin="dense"
-                            required
-                            size={"large"}
-                            id="email"
-                            label="Email"
-                            name="email"
-                            type="text"
-    
-                            fullWidth
-                            variant={"outlined"}
-    
-    
-                          />
-                        </Grid>
-                      </Grid>
-                    </Container>
-                    {/* <!-------------------------------------------------------For Stepper 1 ---------------------------------------------------------------> */}
-                  </Box>
-                  <Container component="main" maxWidth="lg">
-    
-                    <Button
-                      variant="contained"
-                      sx={{
-                        borderRadius: "40px",
-                        width: "294px",
-                        backgroundColor: "#10CFC9",
-                      }}
-                      color="primary"
-                      // onClick={handleNext}
-                      type="submit"
-                    >
-                    {button}
-                    </Button>
-                  </Container>
-    
-    
-    
-                  <Container component="main" maxWidth="lg">
-                    <Grid
-                      container
-                      spacing={2}
-                      direction="row"
-                      alignItems="center"
-                      justifyContent="center"
-                      style={{ marginTop: 8, marginBottom: 30 }}
-                    >
-                      <Grid item xs={8}>
-                        <p className="already">Already have an account?</p>
-                      </Grid>
-                      <Grid item xs={4}>
-                        <Link
-                          href="/Login"
-                          className="login"
-                          style={{ textDecoration: "none", marginLeft: 25 }}
-                        >
-                          {"Login"}
-                        </Link>
-                      </Grid>
-                    </Grid>
-                  </Container>
-    
-                </Box>
-              </Container>
-            </div>
-          </form>
-        );
-   
-    
-  };
+                  {"Login"}
+                </Link>
+              </Grid>
+            </Grid>
+          </Container>
+        </Container>
+      </div>
+    </form>
+  );
+};
 
-  export default Step1;
+export default Step1;
