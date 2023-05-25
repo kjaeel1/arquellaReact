@@ -17,6 +17,9 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { registerUser } from "../../services/auth";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
+import Button from "@mui/material/Button";
 
 const Register = (props) => {
   const [selectedValue, setSelectedValue] = React.useState("a");
@@ -54,6 +57,17 @@ const Register = (props) => {
   const [noOfZonesHome, SetNoOfZonesHome] = useState("");
   const [noOfCommRoomsHome, SetNoOfCommRoomsHome] = useState("");
   const [noOfEnSuiteHOme, SetNoOfEnSuiteHome] = useState("");
+  const [openLoader, setOpenLoader] = React.useState(false);
+
+
+
+  const handleCloseLoader = () => {
+    setOpenLoader(false);
+  };
+  const handleToggle = () => {
+    setOpenLoader(true);
+  };
+
 
   // const [careGroupName, setCareGroupName] = useState("");
 
@@ -146,6 +160,7 @@ const Register = (props) => {
 
   //API call
   const handleNext = async (data) => {
+
     const updatedReqPyloadData = {
       care_group_name: careGroupName,
       care_group_email: groupEmail,
@@ -175,17 +190,21 @@ const Register = (props) => {
       no_of_care_homes: noOfHomes,
     };
 
+    handleToggle();
+
     if (activeStep == steps.length - 1) {
       await registerUser(updatedReqPyloadData)
         .then((data) => {
+          handleToggle();
           console.log(" *//*-", JSON.stringify(data, null, 2));
           // localStorage.setItem("refreshToken", res.data.refresh_token);
-
-          navigate("/dashboard");
+          // handleCloseLoader();
+          // navigate("/dashboard");
           // redirect to home page or dashboard
         })
         .catch((error) => {
           console.log("condii runn *//*-", JSON.stringify(error, null, 2));
+          handleCloseLoader();
         });
     } else {
       setActiveStep(activeStep + 1);
@@ -273,7 +292,7 @@ const Register = (props) => {
                   <Stepper
                     alternativeLabel
                     activeStep={activeStep}
-                    // onClick={ ()=>  setActiveStep(activeStep + 1) }
+                  // onClick={ ()=>  setActiveStep(activeStep + 1) }
                   >
                     {steps.map((step, index) => {
                       const labelProps = {};
@@ -293,20 +312,20 @@ const Register = (props) => {
                               color: "#10CFC9", // circle color (COMPLETED)
                             },
                             "& .MuiStepLabel-label.Mui-completed.MuiStepLabel-alternativeLabel":
-                              {
-                                color: "grey.500", // Just text label (COMPLETED)
-                              },
+                            {
+                              color: "grey.500", // Just text label (COMPLETED)
+                            },
                             "& .MuiStepLabel-root .Mui-active": {
                               color: "#10CFC9", // circle color (ACTIVE)
                             },
                             "& .MuiStepLabel-label.Mui-active.MuiStepLabel-alternativeLabel":
-                              {
-                                color: "common.white", // Just text label (ACTIVE)
-                              },
+                            {
+                              color: "common.white", // Just text label (ACTIVE)
+                            },
                             "& .MuiStepLabel-root .Mui-active .MuiStepIcon-text":
-                              {
-                                fill: "white", // circle's number (ACTIVE)
-                              },
+                            {
+                              fill: "white", // circle's number (ACTIVE)
+                            },
                           }}
                         >
                           <StepLabel {...labelProps}>{step}</StepLabel>
@@ -399,9 +418,22 @@ const Register = (props) => {
                 </Container>
               </div>
             </div>
+
+
+            <Backdrop
+              sx={{
+                color: "#fff",
+                zIndex: (theme) => theme.zIndex.drawer + 1,
+              }}
+              open={openLoader}
+              onClick={handleCloseLoader}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
           </Grid>
         </Grid>
       </Box>
+
     </div>
   );
 };

@@ -31,6 +31,7 @@ const Step2 = ({ button, getData }) => {
   const formOptions = { resolver: yupResolver(formSchema) };
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
+  
   function onSubmit(data) {
     // console.log(JSON.stringify(data, null, 4));
 

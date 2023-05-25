@@ -44,7 +44,10 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { logInWithEmailAndPassword } from "../../services/auth";
 
-import validator from 'validator'
+import validator from "validator";
+
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
@@ -54,9 +57,12 @@ function Login() {
 
   const [open, setOpen] = React.useState(false);
   const [open1, setOpen1] = React.useState(false);
-  const [emailError, setEmailError] = useState('')
+  const [emailError, setEmailError] = useState("");
   const [text, setText] = useState("");
   const [password, setPassword] = useState("");
+
+  const [openLoader, setOpenLoader] = React.useState(false);
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -64,8 +70,6 @@ function Login() {
   const handleClose = () => {
     setOpen(false);
   };
-
-
 
   const handleClickOpen1 = () => {
     setOpen1(true);
@@ -75,8 +79,12 @@ function Login() {
     setOpen1(false);
   };
 
-
-
+  const handleCloseLoader = () => {
+    setOpenLoader(false);
+  };
+  const handleToggle = () => {
+    setOpenLoader(!open);
+  };
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -108,9 +116,9 @@ function Login() {
     handleClickOpen1();
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    handleToggle();
 
     const data = new FormData(event.currentTarget);
     console.log("login form daqta", data);
@@ -120,64 +128,51 @@ function Login() {
       password: data.get("password"),
     };
 
-
-
-    if (text === '' || password.length === 0) {
-
+    if (text === "" || password.length === 0) {
       console.log("here in error11");
+      handleCloseLoader();
       openAlert1();
-    }
-    else {
-
+    } else {
       await logInWithEmailAndPassword(userPayload).then((data) => {
-
-
         console.log("here in away");
         if (data === undefined) {
-
-
+          handleCloseLoader();
           openAlert();
-        }
-        else {
-          console.log(JSON.stringify(data, null, 2))
-          localStorage.setItem('refreshToken', data.data.refresh_token);
+        } else {
+          console.log(JSON.stringify(data, null, 2));
+          localStorage.setItem("refreshToken", data.data.refresh_token);
+          handleCloseLoader();
           navigate("/dashboard");
-
-
         }
-
-
       });
     }
-
-
   };
 
   const validateEmail = (e) => {
+    var email = e.target.value;
 
-    var email = e.target.value
+    setText(email);
 
-    setText(email)
-
-    if (email === '' || undefined) {
-      setEmailError('Enter something)')
+    if (email === "" || undefined) {
+      setEmailError("Enter something)");
     }
 
     if (validator.isEmail(email)) {
-      setEmailError('Valid Email :)')
+      setEmailError("Valid Email :)");
+    } else {
+      setEmailError("Enter valid Email!");
     }
-    else {
-      setEmailError('Enter valid Email!')
-    }
-  }
+  };
 
   const validatePw = (e) => {
-    console.log("-----------------------------------------------", e.target.value)
-    var password = e.target.value
+    console.log(
+      "-----------------------------------------------",
+      e.target.value
+    );
+    var password = e.target.value;
 
-    setPassword(password)
-
-  }
+    setPassword(password);
+  };
 
   return (
     <div>
@@ -210,9 +205,21 @@ function Login() {
                   </div>
                 </div>
 
+                {/* <Button onClick={handleToggle}>Show backdrop</Button> */}
+                <Backdrop
+                  sx={{
+                    color: "#fff",
+                    zIndex: (theme) => theme.zIndex.drawer + 1,
+                  }}
+                  open={openLoader}
+                  onClick={handleCloseLoader}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+
                 <Container component="main" maxWidth="xs">
                   <Box
-                    className='formParentContainer'
+                    className="formParentContainer"
                     sx={{
                       boxShadow: 1,
                       width: 374,
@@ -251,7 +258,6 @@ function Login() {
                           onChange={(text) => validateEmail(text)}
                         />
                       </Container>
-
 
                       <Container component="main">
                         <FormControl
@@ -306,14 +312,15 @@ function Login() {
                             uppercase 1 lowercase & 1 numeric character
                           </p>
                         </div>
-                        <span style={{
-                          fontWeight: 'bold',
-                          color: 'red',
-                          fontSize: 14,
-                          fontFamily: 'muli',
-                          marginTop: 10
-
-                        }}>
+                        <span
+                          style={{
+                            fontWeight: "bold",
+                            color: "red",
+                            fontSize: 14,
+                            fontFamily: "muli",
+                            marginTop: 10,
+                          }}
+                        >
                           {emailError}
                         </span>
                         <div className="checkboxCont">
@@ -337,11 +344,11 @@ function Login() {
                             fontWeight: 700,
                             fontSize: 14,
                             color: "#1D192B",
-                            lineHeight: '20px'
+                            lineHeight: "20px",
                           }}
-                          onClick={() => { }}
+                          onClick={() => {}}
                         >
-                          <span className="loginBtnLabel" >LogIn</span>
+                          <span className="loginBtnLabel">LogIn</span>
                         </Button>
                       </Container>
 
@@ -391,9 +398,9 @@ function Login() {
                                   borderColor: "#10CFC9",
                                 },
                                 "&.Mui-focused .MuiOutlinedInput-notchedOutline":
-                                {
-                                  borderColor: "#10CFC9",
-                                },
+                                  {
+                                    borderColor: "#10CFC9",
+                                  },
                                 "&:hover .MuiOutlinedInput-notchedOutline": {
                                   borderColor: "#10CFC9",
                                 },
@@ -440,7 +447,6 @@ function Login() {
         </Grid>
       </Box>
 
-
       <Dialog
         open={open}
         onClose={handleClose}
@@ -460,9 +466,6 @@ function Login() {
           <Button onClick={handleClose}>Try Again</Button>
         </DialogActions>
       </Dialog>
-
-
-
 
       <Dialog
         open={open1}
