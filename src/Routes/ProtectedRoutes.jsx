@@ -14,7 +14,7 @@ function ProtectedRoutes({ component: Component, ...rest }) {
   // style={{padding: '40px 11% 0px 150px'}}
   >
 
-    <TopBar/>
+    {/* <TopBar/> */}
     <Outlet />
   
   </div> : <Navigate to='/login' />
