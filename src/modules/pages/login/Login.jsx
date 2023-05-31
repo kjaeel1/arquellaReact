@@ -139,8 +139,9 @@ function Login() {
           handleCloseLoader();
           openAlert();
         } else {
-          console.log(JSON.stringify(data, null, 2));
-          localStorage.setItem("refreshToken", data.data.refresh_token);
+          // console.log(JSON.stringify(data, null, 2));
+          console.log(data)
+          // localStorage.setItem("refreshToken", data.data.refresh_token);
           handleCloseLoader();
           navigate("/dashboard");
         }
