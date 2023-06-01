@@ -22,23 +22,23 @@ function DashBoardPage() {
 
 
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    axios.defaults.headers.common["Authorization"] = authToken;
+  //   axios.defaults.headers.common["Authorization"] = authToken;
 
-    axios
-      .post(apiUrl)
+  //   axios
+  //     .post(apiUrl)
 
-      .then((response) => {
-        console.log("565", JSON.stringify(response.data, null, 2));
+  //     .then((response) => {
+  //       console.log("565", JSON.stringify(response.data, null, 2));
 
-        setResData([response.data]);
-      })
+  //       setResData([response.data]);
+  //     })
 
-      .catch((error) => {
-        console.log(error);
-      });
-  }, [])
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, [])
 
   const count = useSelector((state) => state.counter.value)
   const dispatch = useDispatch()

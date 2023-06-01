@@ -14,7 +14,7 @@ function DashboardRoutes() {
             <Route element={<ProtectedRoutes />}>
                 {/* <Route exact path={"/" } element={<Blank />} /> */}
                 {/* <Route path='/dashboard' element={<Dashboard />} /> */}
-                <Route path='/dashboard' element={<Navbar />} />
+                <Route path='/dashboard' element={<Dashboard />} />
 
             </Route>
         </Routes>
