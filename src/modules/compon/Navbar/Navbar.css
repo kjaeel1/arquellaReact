@@ -1,3 +1,8 @@
 .innerItemSpacing{
     padding-left: 32px !important;
 }
+
+.nestedLvl1Style{
+    padding-left: 32px !important;
+    background-color: #fff !important;
+}

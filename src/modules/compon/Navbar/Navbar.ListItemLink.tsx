@@ -38,7 +38,7 @@ function ListItemLink(props: ListItemLinkProps) {
             {nested.map((area, index) =>{
                 console.log(area)
             return <div key={index}>
-                    <NavbarArea {...area} />
+                    <NavbarArea innerStyle={true} {...area} />
                     <Divider />
                 </div>
             }

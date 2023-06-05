@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import ListItemLink from "./Navbar.ListItemLink";
 import ExpandLessIcon from '@mui/icons-material/ExpandLess'; 
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import './Navbar.css'
 
 export interface NavBarLinkProps {
     Icon: JSX.Element,
@@ -22,8 +23,9 @@ export interface NavBarLinkProps {
 export interface NavBarAreaProps {
     AreaIcon: JSX.Element,
     Title: string,
-    RootPath: string
-    Links: NavBarLinkProps[]
+    RootPath: string,
+    Links: NavBarLinkProps[],
+    innerStyle?:boolean
 }
 
 const ListItem = styled(MuiListItem, {
@@ -33,7 +35,7 @@ const ListItem = styled(MuiListItem, {
     background: '#D1F9F5'
 }));
 
-export const NavbarArea: React.FC<NavBarAreaProps> = ({ AreaIcon, Title, RootPath, Links }) => {
+export const NavbarArea: React.FC<NavBarAreaProps> = ({ AreaIcon, Title, RootPath, Links,innerStyle }) => {
     const [isExpanded, setExpanded] = React.useState(false);
     let currLocation = useLocation();
     const ToggleExpanded = () => {
@@ -45,9 +47,10 @@ export const NavbarArea: React.FC<NavBarAreaProps> = ({ AreaIcon, Title, RootPat
     }
     return <Fragment>
         <ListItem
+            
             button
             onClick={ToggleExpanded}
-            className={clsx(IsActiveArea(RootPath))}>
+            className={innerStyle ? 'nestedLvl1Style':clsx(IsActiveArea(RootPath))}>
             <ListItemIcon>
                 {AreaIcon}
             </ListItemIcon>

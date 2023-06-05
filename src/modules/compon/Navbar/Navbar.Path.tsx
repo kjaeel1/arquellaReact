@@ -41,64 +41,117 @@ export const NavbarPaths: React.FC<{}> = () => {
             AreaIcon: <HomeIcon />,
             Links: [{
                 Icon: <HelpIcon />,
-                Path: "gettingstarted",
-                Title: "Getting started"
+                Path: "LiveDashboard",
+                Title: "Live Dashboard"
+            },
+            {
+                Icon: <HelpIcon />,
+                Path: "Overview",
+                Title: "Overview"
+            }, {
+                Icon: <HelpIcon />,
+                Path: "MainDashboard",
+                Title: "Main Dashboard"
+            }, {
+                Icon: <HelpIcon />,
+                Path: "OverviewReports",
+                Title: "Overview Reports"
+            }, {
+                Icon: <HelpIcon />,
+                Path: "SystemNotice",
+                Title: "System Notice"
+            }, {
+                Icon: <HelpIcon />,
+                Path: "features",
+                Title: "Adverts for new features of the system"
             }],
-            RootPath: "home",
-            Title: "Home"
+            RootPath: "CALL",
+            Title: "CALL"
         },
         {
             AreaIcon: <DashboardIcon />,
-            RootPath: "masterdata",
-            Title: "Master data",
+            RootPath: "System",
+            Title: "System",
             Links: [
                 {
                     Icon: <HelpIcon />,
-                    Path: "gettingstarted",
-                    Title: "Getting started"
+                    Path: "Call",
+                    Title: "Call"
                 },
                 {
                     Icon: <AppsIcon />,
-                    Path: "branchgroups",
-                    Title: "Branchgroups"
+                    Path: "Maintenace",
+                    Title: "Maintenace"
                 },
                 {
                     Icon: <AccountTreeIcon />,
-                    Path: "branches",
-                    Title: "Branches"
+                    Path: "KPI",
+                    Title: "KPI"
                 },
                 {
                     Icon: <GroupIcon />,
-                    Path: "users",
-                    Title: "Users"
+                    Path: "Notification ",
+                    Title: "Notification "
                 },
                 {
                     Icon: <BuildIcon />,
-                    Path: "multichannel",
-                    Title: "Multichannel configuration"
-                },
-                {
-                    Icon: <BuildIcon />,
-                    Path: "sample",
-                    Title: "test",
+                    Path: "Move",
+                    Title: "Move",
                     nested: [{
                         AreaIcon: <HomeIcon />,
                         Links: [{
                             Icon: <HelpIcon />,
-                            Path: "gettingHome",
-                            Title: "GettingHome"
+                            Path: "Live View",
+                            Title: "Live View"
                         },
                         {
                             Icon: <HelpIcon />,
-                            Path: "gettingHome",
-                            Title: "GettingHome"
+                            Path: "Config",
+                            Title: "Config"
+                        },
+                        {
+                            Icon: <HelpIcon />,
+                            Path: "Maintenace",
+                            Title: "Maintenace"
+                        },
+                        {
+                            Icon: <HelpIcon />,
+                            Path: "KPI",
+                            Title: "KPI"
+                        },
+                        {
+                            Icon: <HelpIcon />,
+                            Path: "Notification ",
+                            Title: "Notification "
                         }
                         ],
-                        RootPath: "home",
-                        Title: "NestedHome",
+                        RootPath: "Move",
+                        Title: "Move",
                     }],
                     nestedLvl: 2
                 },
+                // {
+                //     Icon: <BuildIcon />,
+                //     Path: "sample",
+                //     Title: "test",
+                //     nested: [{
+                //         AreaIcon: <HomeIcon />,
+                //         Links: [{
+                //             Icon: <HelpIcon />,
+                //             Path: "gettingHome",
+                //             Title: "GettingHome"
+                //         },
+                //         {
+                //             Icon: <HelpIcon />,
+                //             Path: "gettingHome",
+                //             Title: "GettingHome"
+                //         }
+                //         ],
+                //         RootPath: "home",
+                //         Title: "NestedHome",
+                //     }],
+                //     nestedLvl: 2
+                // },
 
             ],
 

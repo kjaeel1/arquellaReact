@@ -32,7 +32,7 @@ const drawerWidth = 240;
 // const count = useSelector((state) => state.draserState.value)
 
 
-const openedMixin = (theme: Theme): CSSObject => ({
+const openedMixin = (theme: Theme): CSSObject => ({ 
     width: drawerWidth,
     transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
